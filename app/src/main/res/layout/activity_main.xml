@@ -23,16 +23,18 @@
             android:id="@+id/tabLayout_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabSelectedTextColor="#5177E2"
+            app:tabIndicatorColor="#D9DD6B"
+            app:tabSelectedTextColor="#D9DD6B"
             app:tabGravity="fill"
             app:tabMode="fixed"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
             app:tabTextColor="@android:color/white" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
+        android:background="#E8E8E8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
