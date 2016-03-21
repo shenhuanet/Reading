@@ -1,14 +1,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.myapplication.com.example.fragment.FragmentTwo">
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/fragment_tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="25sp" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:indeterminateDrawable="@drawable/common_progressbar"
+        android:indeterminateDuration="1000" />
 
 </FrameLayout>
