@@ -20,15 +20,25 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(FragmentOne.newInstance(), "TabOne");//添加Fragment
-        viewPagerAdapter.addFragment(FragmentTwo.newInstance(), "TabTwo");
-        viewPagerAdapter.addFragment(FragmentThree.newInstance(), "TabThree");
+        viewPagerAdapter.addFragment(FragmentHome.newInstance(), getString(R.string.tab_home));//添加Fragment
+        viewPagerAdapter.addFragment(FragmentCSDN.newInstance(), getString(R.string.tab_csdn));
+        viewPagerAdapter.addFragment(FragmentSegf.newInstance(), getString(R.string.tab_segf));
+        viewPagerAdapter.addFragment(FragmentTuiku.newInstance(), getString(R.string.tab_tuiku));
+        viewPagerAdapter.addFragment(FragmentHonghei.newInstance(), getString(R.string.tab_honghei));
+        viewPagerAdapter.addFragment(FragmentKaiyuan.newInstance(), getString(R.string.tab_kaiyuan));
+        viewPagerAdapter.addFragment(FragmentKaifazhe.newInstance(), getString(R.string.tab_kaifazhe));
+        viewPagerAdapter.addFragment(FragmentKanyuan.newInstance(), getString(R.string.tab_kanyuan));
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout_top);
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabOne"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabTwo"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabThree"));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_home)));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_csdn)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_segf)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_tuiku)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_honghei)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kaiyuan)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kaifazhe)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kanyuan)));
         mTabLayout.setSelectedTabIndicatorHeight(4);
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
     }

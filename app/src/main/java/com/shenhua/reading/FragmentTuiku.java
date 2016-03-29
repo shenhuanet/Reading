@@ -6,24 +6,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-public class FragmentTwo extends Fragment {
-    private static FragmentTwo instance=null;
-    public static FragmentTwo newInstance() {
+public class FragmentTuiku extends Fragment {
+
+    private static FragmentTuiku instance=null;
+    public static FragmentTuiku newInstance() {
         if(instance==null){
-            instance= new FragmentTwo();
+            instance= new FragmentTuiku();
         }
         return instance;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fragment_two, container, false);
-        TextView mTextView = (TextView) view.findViewById(R.id.fragment_tv);
-        mTextView.setText("这是第二个Fragment");
+        View view = inflater.inflate(R.layout.fragment_tuiku, container, false);
         return view;
     }
 

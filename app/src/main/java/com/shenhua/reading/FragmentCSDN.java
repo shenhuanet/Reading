@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentOne extends Fragment {
-    private static FragmentOne instance = null;
+public class FragmentCSDN extends Fragment {
+    private static FragmentCSDN instance = null;
 
-    public static FragmentOne newInstance() {
+    public static FragmentCSDN newInstance() {
         if (instance == null) {
-            instance = new FragmentOne();
+            instance = new FragmentCSDN();
         }
         return instance;
     }
@@ -25,7 +25,7 @@ public class FragmentOne extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fragment_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_csdn, container, false);
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
