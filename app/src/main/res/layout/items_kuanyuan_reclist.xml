@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/ky_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="物联网核心协议，消息推送技术演进"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorTheme" />
+
+    <TextView
+        android:id="@+id/ky_item_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:maxLines="3"
+        android:text="消息触达能力是物联网（internet ofthings, IOT）的重要支撑，而物联网很多技术都源于移动互联网。本文阐述移动互联网消息推送技术在物联网中的应用和演进。一、物联网架构和关键技术从开发的角度，无线接入是物联网设备端的核心技术，身份设备管理和消息推送技术是物联网云端的核心技术。而从场景体验的角度，除了前者"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ky_item_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorThemeLight"
+            android:drawableLeft="@mipmap/ic_nick_white"
+            android:drawablePadding="2dp"
+            android:padding="2dp"
+            android:text="doliangzhe"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/ky_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="• 18小时前"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/ky_item_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:drawableLeft="@mipmap/ic_comment"
+            android:drawablePadding="2dp"
+            android:padding="2dp"
+            android:text="评论(%s)"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/ky_item_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:drawableLeft="@mipmap/ic_see"
+            android:drawablePadding="2dp"
+            android:padding="2dp"
+            android:text="阅读(%s)"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/ky_item_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_like"
+            android:drawablePadding="2dp"
+            android:padding="2dp"
+            android:text="喜欢(%s)"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
