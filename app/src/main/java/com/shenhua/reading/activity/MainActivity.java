@@ -1,4 +1,4 @@
-package com.shenhua.reading;
+package com.shenhua.reading.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,6 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.shenhua.reading.R;
+import com.shenhua.reading.adapter.MyViewPagerAdapter;
+import com.shenhua.reading.fragment.FragmentCSDN;
+import com.shenhua.reading.fragment.FragmentHome;
+import com.shenhua.reading.fragment.FragmentHonghei;
+import com.shenhua.reading.fragment.FragmentKaifazhe;
+import com.shenhua.reading.fragment.FragmentKaiyuan;
+import com.shenhua.reading.fragment.FragmentKanyuan;
+import com.shenhua.reading.fragment.FragmentSegf;
+import com.shenhua.reading.fragment.FragmentTuiku;
 
 public class MainActivity extends AppCompatActivity {
 

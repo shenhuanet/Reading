@@ -1,4 +1,4 @@
-package com.shenhua.reading;
+package com.shenhua.reading.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.shenhua.reading.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         params.height = lists.get(position);//把随机的高度赋予item布局
         holder.itemView.setLayoutParams(params);
-        holder.mTextView.setText(position+"");
+        holder.mTextView.setText(position + "");
     }
 
     @Override
@@ -51,6 +53,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     TextView mTextView;
+
     public MyViewHolder(View itemView) {
         super(itemView);
         mTextView = (TextView) itemView.findViewById(R.id.item_tv);

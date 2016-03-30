@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#FAFAFA</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorTheme">#009C80</color>
+    <color name="colorThemeLight">#7CD6C9</color>
+    <color name="colorContentBG">#EEEEEE</color>
+    <color name="colorIndicator">#FFFF00</color>
+    <color name="colorSwipeRefresh01">#009C80</color>
+    <color name="colorSwipeRefresh02">#1BAFC3</color>
+    <color name="colorSwipeRefresh03">#FF4081</color>
+    <color name="colorSwipeRefresh04">#EE80CD</color>
 </resources>

@@ -1,16 +1,12 @@
-package com.shenhua.reading;
+package com.shenhua.reading.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.shenhua.reading.R;
 
 public class FragmentKaifazhe extends Fragment {
     private static FragmentKaifazhe instance = null;

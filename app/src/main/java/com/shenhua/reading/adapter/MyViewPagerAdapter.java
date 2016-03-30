@@ -1,4 +1,4 @@
-package com.shenhua.reading;
+package com.shenhua.reading.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
