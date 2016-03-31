@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialLayout">
+        <attr name="falpha" format="integer" />
+        <attr name="falpha_step" format="integer" />
+        <attr name="fframerate" format="integer" />
+        <attr name="fduration" format="integer" />
+        <attr name="fcolor" format="color" />
+        <attr name="fscale" format="float" />
+    </declare-styleable>
+
+</resources>

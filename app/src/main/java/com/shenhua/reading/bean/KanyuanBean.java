@@ -15,6 +15,8 @@ public class KanyuanBean implements Serializable{
     private String comment;
     private String read;
     private String like;
+    private String url;
+
 
     public String getTitle() {
         return title;
@@ -70,5 +72,13 @@ public class KanyuanBean implements Serializable{
 
     public void setLike(String like) {
         this.like = like;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

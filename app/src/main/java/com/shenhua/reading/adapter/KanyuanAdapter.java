@@ -6,14 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.shenhua.reading.R;
 import com.shenhua.reading.bean.KanyuanBean;
+
 import java.util.List;
 
 /**
  * Created by shenhua on 2016/3/30.
  */
-public class KanyuanAdapter extends RecyclerView.Adapter<KanyuanViewHolder> implements View.OnClickListener{
+public class KanyuanAdapter extends RecyclerView.Adapter<KanyuanViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<KanyuanBean> datas;
@@ -35,8 +37,15 @@ public class KanyuanAdapter extends RecyclerView.Adapter<KanyuanViewHolder> impl
     @Override
     public void onBindViewHolder(KanyuanViewHolder holder, int position) {
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-        holder.title.setText(datas.get(position).getTitle());
-        holder.itemView.setTag(datas.get(position).getTitle());//将数据保存在Tag中，以便点击时进行获取
+        KanyuanBean d = datas.get(position);
+        holder.title.setText(d.getTitle());
+        holder.describe.setText("         " + d.getDescribe());
+        holder.nick.setText(d.getNick());
+        holder.time.setText(d.getTime());
+        holder.comment.setText(d.getComment());
+        holder.read.setText(d.getRead());
+        holder.like.setText(d.getLike());
+        holder.itemView.setTag(d.getUrl());//将数据保存在Tag中，以便点击时进行获取
     }
 
     @Override
@@ -74,12 +83,18 @@ public class KanyuanAdapter extends RecyclerView.Adapter<KanyuanViewHolder> impl
 }
 
 class KanyuanViewHolder extends RecyclerView.ViewHolder {
-    TextView title;
+    TextView title, describe, nick, time, comment, read, like;
 
     public KanyuanViewHolder(View itemView) {
         super(itemView);
         //findviewbyid
         title = (TextView) itemView.findViewById(R.id.ky_item_title);
+        describe = (TextView) itemView.findViewById(R.id.ky_item_describe);
+        nick = (TextView) itemView.findViewById(R.id.ky_item_nick);
+        time = (TextView) itemView.findViewById(R.id.ky_item_time);
+        comment = (TextView) itemView.findViewById(R.id.ky_item_comment);
+        read = (TextView) itemView.findViewById(R.id.ky_item_read);
+        like = (TextView) itemView.findViewById(R.id.ky_item_like);
     }
 }
 

@@ -22,6 +22,8 @@ import com.shenhua.reading.utils.SpaceItemDecoration;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +57,11 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
             refreshLayout.setOnRefreshListener(this);
             recyclerView = (RecyclerView) view.findViewById(R.id.kanyuan_rec_list);
             recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+            LinearLayoutManager llm = new LinearLayoutManager((getContext()));
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(llm);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
         }
         ViewGroup parent = (ViewGroup) view.getParent();
         if (parent != null)
@@ -64,7 +71,7 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
     private void initDatas() {
-        final AsyncTask<String, Integer, Void> task = new AsyncTask<String, Integer, Void>() {
+        AsyncTask<String, Integer, Void> task = new AsyncTask<String, Integer, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -78,19 +85,32 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
                 Document doc = null;
                 try {
                     doc = Jsoup.connect(MyStringUtils.URL_KANYUAN_DAIMA).get();
+                    if (doc != null) {
+                        Elements main = doc.body().getElementsByClass("blog-wrap");
+                        for (Element element : main) {
+                            Elements elements = element.getElementsByTag("li");
+                            for (Element content : elements) {
+                                KanyuanBean data = new KanyuanBean();
+                                data.setTitle(content.getElementsByClass("title").text());
+                                data.setUrl(content.getElementsByTag("a").attr("href").toString());
+                                data.setDescribe(content.getElementsByClass("shortContent").text());
+                                data.setNick(content.getElementsByClass("userNick").text());
+                                data.setTime(content.getElementsByClass("put-time").text());
+                                data.setComment(content.getElementsByClass("comment-num").text());
+                                String viewnum = content.getElementsByClass("view-num").text();
+                                String[] num = viewnum.split(" ");
+                                data.setRead(num[0]);
+                                data.setLike(num[1]);
+                                datas.add(data);
+                            }
+                        }
+                    } else {
+                        System.out.println("数据为空 ");
+                    }
                 } catch (IOException e) {
+                    System.out.println("请求错误");
                     e.printStackTrace();
                 }
-                if (doc!=null){
-
-                }else {
-
-                }
-//                for (int i = 0; i < 10; i++) {
-//                    KanyuanBean data = new KanyuanBean();
-//                    data.setTitle(Integer.toString(i));
-//                    datas.add(data);
-//                }
                 return null;
             }
 
@@ -99,60 +119,13 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
                 super.onPostExecute(o);
                 adapter = new KanyuanAdapter(getContext(), datas);
                 adapter.notifyDataSetChanged();
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
-
-                adapter.setOnItemClickListener(new KanyuanAdapter.OnRecyclerViewItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, String data) {
-                        Toast.makeText(getContext(),data,Toast.LENGTH_SHORT).show();
-                    }
-                });
-                System.out.println("ok:" + Integer.toString(datas.size()));
-            }
-        };
-        task.execute();
-    }
-
-    private void initDatas2() {
-        final AsyncTask<String, Integer, Void> task = new AsyncTask<String, Integer, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                System.out.println("start");
-            }
-
-            @Override
-            protected Void doInBackground(String... params) {
-                datas = new ArrayList<KanyuanBean>();
-                datas.clear();
-                for (int i = 0; i < 5; i++) {
-                    KanyuanBean data = new KanyuanBean();
-                    data.setTitle("物联网核心协议，消息推送技术演进");
-                    data.setTime("shijian");
-                    datas.add(data);
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void o) {
-                super.onPostExecute(o);
-                adapter = new KanyuanAdapter(getContext(), datas);
-                adapter.notifyDataSetChanged();
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(adapter);
                 adapter.setOnItemClickListener(new KanyuanAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, String data) {
-                        Toast.makeText(getContext(),data,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), data, Toast.LENGTH_SHORT).show();//这里处理跳转事件
                     }
                 });
-                System.out.println("ok:" + Integer.toString(datas.size()));
             }
         };
         task.execute();
@@ -168,7 +141,7 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                initDatas2();
+                initDatas();
                 refreshLayout.setRefreshing(false);
             }
         }).start();
