@@ -8,38 +8,38 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.bean.KanyuanBean;
+import com.shenhua.reading.bean.KanyuanDaimaBean;
 
 import java.util.List;
 
 /**
  * Created by shenhua on 2016/3/30.
  */
-public class KanyuanAdapter extends RecyclerView.Adapter<KanyuanViewHolder> implements View.OnClickListener {
+public class KanyuanDaimaAdapter extends RecyclerView.Adapter<KanyuanDaimaViewHolder> implements View.OnClickListener {
 
     private Context context;
-    private List<KanyuanBean> datas;
+    private List<KanyuanDaimaBean> datas;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public KanyuanAdapter(Context context, List<KanyuanBean> datas) {
+    public KanyuanDaimaAdapter(Context context, List<KanyuanDaimaBean> datas) {
         this.context = context;
         this.datas = datas;
     }
 
     @Override
-    public KanyuanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.items_kuanyuan_reclist, parent, false);
-        KanyuanViewHolder holder = new KanyuanViewHolder(view);
+    public KanyuanDaimaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.items_kanyuan_daima_reclist, parent, false);
+        KanyuanDaimaViewHolder holder = new KanyuanDaimaViewHolder(view);
         view.setOnClickListener(this);//将创建的View注册点击事件
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(KanyuanViewHolder holder, int position) {
+    public void onBindViewHolder(KanyuanDaimaViewHolder holder, int position) {
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-        KanyuanBean d = datas.get(position);
+        KanyuanDaimaBean d = datas.get(position);
         holder.title.setText(d.getTitle());
-        holder.describe.setText("         " + d.getDescribe());
+        holder.describe.setText(d.getDescribe());
         holder.nick.setText(d.getNick());
         holder.time.setText(d.getTime());
         holder.comment.setText(d.getComment());
@@ -82,10 +82,10 @@ public class KanyuanAdapter extends RecyclerView.Adapter<KanyuanViewHolder> impl
     }
 }
 
-class KanyuanViewHolder extends RecyclerView.ViewHolder {
+class KanyuanDaimaViewHolder extends RecyclerView.ViewHolder {
     TextView title, describe, nick, time, comment, read, like;
 
-    public KanyuanViewHolder(View itemView) {
+    public KanyuanDaimaViewHolder(View itemView) {
         super(itemView);
         //findviewbyid
         title = (TextView) itemView.findViewById(R.id.ky_item_title);

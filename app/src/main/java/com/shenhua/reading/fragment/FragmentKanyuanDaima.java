@@ -7,16 +7,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.adapter.KanyuanAdapter;
-import com.shenhua.reading.bean.KanyuanBean;
+import com.shenhua.reading.adapter.KanyuanDaimaAdapter;
+import com.shenhua.reading.bean.KanyuanDaimaBean;
 import com.shenhua.reading.utils.MyStringUtils;
 import com.shenhua.reading.utils.SpaceItemDecoration;
 
@@ -28,20 +26,19 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static FragmentKanyuan instance = null;
+    private static FragmentKanyuanDaima instance = null;
     private View view;
-    private KanyuanAdapter adapter;
+    private KanyuanDaimaAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
-    private List<KanyuanBean> datas = null;
+    private List<KanyuanDaimaBean> datas = null;
 
-    public static FragmentKanyuan newInstance() {
+    public static FragmentKanyuanDaima newInstance() {
         if (instance == null) {
-            instance = new FragmentKanyuan();
+            instance = new FragmentKanyuanDaima();
         }
         return instance;
     }
@@ -50,7 +47,7 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_kanyuan, container, false);
+            view = inflater.inflate(R.layout.fragment_kanyuan_daima, container, false);
             int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rec_item_space);
             refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.kanyuan_refreshlayout);
             refreshLayout.setColorSchemeResources(R.color.colorSwipeRefresh01, R.color.colorSwipeRefresh02, R.color.colorSwipeRefresh03, R.color.colorSwipeRefresh04);
@@ -80,7 +77,7 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
 
             @Override
             protected Void doInBackground(String... params) {
-                datas = new ArrayList<KanyuanBean>();
+                datas = new ArrayList<KanyuanDaimaBean>();
                 datas.clear();
                 Document doc = null;
                 try {
@@ -90,13 +87,13 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
                         for (Element element : main) {
                             Elements elements = element.getElementsByTag("li");
                             for (Element content : elements) {
-                                KanyuanBean data = new KanyuanBean();
+                                KanyuanDaimaBean data = new KanyuanDaimaBean();
                                 data.setTitle(content.getElementsByClass("title").text());
                                 data.setUrl(content.getElementsByTag("a").attr("href").toString());
-                                data.setDescribe(content.getElementsByClass("shortContent").text());
+                                data.setDescribe("\u3000\u3000" + content.getElementsByClass("shortContent").text());
                                 data.setNick(content.getElementsByClass("userNick").text());
                                 data.setTime(content.getElementsByClass("put-time").text());
-                                data.setComment(content.getElementsByClass("comment-num").text());
+                                data.setComment(content.getElementsByClass("comment-num").text().trim().replace("•", ""));
                                 String viewnum = content.getElementsByClass("view-num").text();
                                 String[] num = viewnum.split(" ");
                                 data.setRead(num[0]);
@@ -117,10 +114,10 @@ public class FragmentKanyuan extends Fragment implements SwipeRefreshLayout.OnRe
             @Override
             protected void onPostExecute(Void o) {
                 super.onPostExecute(o);
-                adapter = new KanyuanAdapter(getContext(), datas);
+                adapter = new KanyuanDaimaAdapter(getContext(), datas);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
-                adapter.setOnItemClickListener(new KanyuanAdapter.OnRecyclerViewItemClickListener() {
+                adapter.setOnItemClickListener(new KanyuanDaimaAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, String data) {
                         Toast.makeText(getContext(), data, Toast.LENGTH_SHORT).show();//这里处理跳转事件

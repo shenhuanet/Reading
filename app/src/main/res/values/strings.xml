@@ -8,7 +8,8 @@
     <string name="tab_honghei">红黑联盟</string>
     <string name="tab_kaiyuan">开源中国</string>
     <string name="tab_kaifazhe">开发者头条</string>
-    <string name="tab_kanyuan">看源社区</string>
+    <string name="tab_kanyuan_daima">看源代码</string>
+    <string name="tab_kanyuan_zujian">看源组件</string>
     <string name="text_center_dot">•</string>
 
 

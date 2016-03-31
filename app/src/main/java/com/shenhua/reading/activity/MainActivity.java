@@ -15,7 +15,8 @@ import com.shenhua.reading.fragment.FragmentHome;
 import com.shenhua.reading.fragment.FragmentHonghei;
 import com.shenhua.reading.fragment.FragmentKaifazhe;
 import com.shenhua.reading.fragment.FragmentKaiyuan;
-import com.shenhua.reading.fragment.FragmentKanyuan;
+import com.shenhua.reading.fragment.FragmentKanyuanDaima;
+import com.shenhua.reading.fragment.FragmentKanyuanZujian;
 import com.shenhua.reading.fragment.FragmentSegf;
 import com.shenhua.reading.fragment.FragmentTuiku;
 
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(FragmentHonghei.newInstance(), getString(R.string.tab_honghei));
         viewPagerAdapter.addFragment(FragmentKaiyuan.newInstance(), getString(R.string.tab_kaiyuan));
         viewPagerAdapter.addFragment(FragmentKaifazhe.newInstance(), getString(R.string.tab_kaifazhe));
-        viewPagerAdapter.addFragment(FragmentKanyuan.newInstance(), getString(R.string.tab_kanyuan));
+        viewPagerAdapter.addFragment(FragmentKanyuanDaima.newInstance(), getString(R.string.tab_kanyuan_daima));
+        viewPagerAdapter.addFragment(FragmentKanyuanZujian.newInstance(), getString(R.string.tab_kanyuan_zujian));
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout_top);
@@ -49,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_honghei)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kaiyuan)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kaifazhe)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kanyuan)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kanyuan_daima)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.tab_kanyuan_zujian)));
         mTabLayout.setSelectedTabIndicatorHeight(4);
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
     }

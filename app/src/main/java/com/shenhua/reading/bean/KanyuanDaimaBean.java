@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by shenhua on 2016/3/30.
  */
-public class KanyuanBean implements Serializable{
+public class KanyuanDaimaBean implements Serializable{
 
     private static final long serialVersionUID = -6328595689840037394L;
     private String title;
