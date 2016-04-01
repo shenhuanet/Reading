@@ -62,6 +62,13 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
             refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.kanyuanzujian_refreshlayout);
             refreshLayout.setColorSchemeResources(R.color.colorSwipeRefresh01, R.color.colorSwipeRefresh02, R.color.colorSwipeRefresh03, R.color.colorSwipeRefresh04);
             refreshLayout.setOnRefreshListener(this);
+            refreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    refreshLayout.setRefreshing(true);
+                }
+            });
+            onRefresh();
             recyclerView = (RecyclerView) view.findViewById(R.id.kanyuanzujian_rec_list);
             mLayoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(mLayoutManager);
@@ -128,6 +135,7 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
                 adapter = new KanyuanZujianAdapter(getContext(), datas,mImageLoader,options);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
+                refreshLayout.setRefreshing(false);
                 adapter.setOnItemClickListener(new KanyuanZujianAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, String data) {
@@ -150,7 +158,6 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
                     e.printStackTrace();
                 }
                 initDatas();
-                refreshLayout.setRefreshing(false);
             }
         }).start();
     }

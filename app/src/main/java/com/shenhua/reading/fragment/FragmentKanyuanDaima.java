@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class FragmentKanyuanDaima extends Fragment {
 
     private static FragmentKanyuanDaima instance = null;
     private View view;
@@ -51,7 +51,14 @@ public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout
             int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rec_item_space);
             refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.kanyuan_refreshlayout);
             refreshLayout.setColorSchemeResources(R.color.colorSwipeRefresh01, R.color.colorSwipeRefresh02, R.color.colorSwipeRefresh03, R.color.colorSwipeRefresh04);
-            refreshLayout.setOnRefreshListener(this);
+            refreshLayout.setOnRefreshListener(listener);
+            refreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    refreshLayout.setRefreshing(true);
+                }
+            });
+            listener.onRefresh();
             recyclerView = (RecyclerView) view.findViewById(R.id.kanyuan_rec_list);
             recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
             LinearLayoutManager llm = new LinearLayoutManager((getContext()));
@@ -66,6 +73,23 @@ public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout
         initDatas();
         return view;
     }
+
+    SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
+        public void onRefresh() {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    initDatas();
+                }
+            }).start();
+        }
+    };
+
 
     private void initDatas() {
         AsyncTask<String, Integer, Void> task = new AsyncTask<String, Integer, Void>() {
@@ -117,6 +141,7 @@ public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout
                 adapter = new KanyuanDaimaAdapter(getContext(), datas);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
+                refreshLayout.setRefreshing(false);
                 adapter.setOnItemClickListener(new KanyuanDaimaAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, String data) {
@@ -126,21 +151,5 @@ public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout
             }
         };
         task.execute();
-    }
-
-    @Override
-    public void onRefresh() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                initDatas();
-                refreshLayout.setRefreshing(false);
-            }
-        }).start();
     }
 }
