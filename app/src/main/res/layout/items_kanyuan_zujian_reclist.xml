@@ -22,7 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/colorTheme"
+            android:ellipsize="end"
             android:gravity="center"
+            android:lines="1"
             android:padding="5dp"
             android:text="A-MusicView"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -39,18 +41,13 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp">
 
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/network_gifimageview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/pic" />
-
                 <ImageView
                     android:id="@+id/kyzj_item_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="110dp"
                     android:layout_gravity="center"
                     android:background="@color/colorImageBG"
+                    android:scaleType="fitXY"
                     android:src="@mipmap/gif" />
             </LinearLayout>
 
@@ -67,7 +64,9 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="\u3000\u3000原创自定义控件之-Canvas实时绘制音乐波形图"
+                    android:ellipsize="end"
+                    android:lines="4"
+                    android:text="\u3000\u3000FloatingText 是一个能够在FloatingText 是一个能够在任何控件之上执行漂浮效果动画的控件，目前已有的漂浮效果有 '位移漂浮' ，'缩放漂浮'，'曲线路径漂浮',更重要的是任何控件之上执行漂浮效果动画的控件，目前已有的漂浮效果有 '位移漂浮' ，'缩放漂浮'，'曲线路径漂浮',更重要的是"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -90,7 +89,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

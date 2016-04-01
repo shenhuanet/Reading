@@ -69,9 +69,7 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             mImageLoader = ImageLoader.getInstance();
             options = new DisplayImageOptions.Builder()
-                    .showStubImage(R.mipmap.gif)
-                    .showImageForEmptyUri(R.mipmap.gif)
-                    .showImageOnFail(R.mipmap.gif).cacheInMemory(true)
+                    .showImageOnFail(R.mipmap.ic_imgload_error).cacheInMemory(true)
                     .cacheOnDisc(true).bitmapConfig(Bitmap.Config.RGB_565)
                     .imageScaleType(ImageScaleType.EXACTLY).build();
             initDatas();
@@ -127,7 +125,7 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
             @Override
             protected void onPostExecute(Void o) {
                 super.onPostExecute(o);
-                adapter = new KanyuanZujianAdapter(getContext(), datas);
+                adapter = new KanyuanZujianAdapter(getContext(), datas,mImageLoader,options);
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 adapter.setOnItemClickListener(new KanyuanZujianAdapter.OnRecyclerViewItemClickListener() {

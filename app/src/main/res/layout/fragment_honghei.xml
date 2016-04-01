@@ -5,4 +5,11 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/network_gifimageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/ic_imgload_error" />
+
 </LinearLayout>
