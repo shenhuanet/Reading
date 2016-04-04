@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.andexert.library.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    ripple:rv_color="@color/colorIndicator"
+    ripple:rv_rippleDuration="400"
+    ripple:rv_type="rectangle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_selector"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/cs_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="2dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorTheme" />
+
+        <TextView
+            android:id="@+id/cs_item_describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="3"
+            android:textColor="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cs_item_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:drawableLeft="@mipmap/ic_nick"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/cs_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="3dp"
+                android:drawableLeft="@mipmap/ic_time"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/cs_item_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="3dp"
+                android:drawableLeft="@mipmap/ic_see"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/cs_item_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="3dp"
+                android:drawableLeft="@mipmap/ic_comment"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.andexert.library.RippleView>

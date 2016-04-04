@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Reading</string>
     <string name="action_settings">Settings</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_csdn">CSDN</string>
+    <string name="tab_segf">SegmentFault</string>
+    <string name="tab_tuiku">推酷</string>
+    <string name="tab_honghei">红黑联盟</string>
+    <string name="tab_kaiyuan">开源中国</string>
+    <string name="tab_kaifazhe">开发者头条</string>
+    <string name="tab_kanyuan_daima">看源代码</string>
+    <string name="tab_kanyuan_zujian">看源组件</string>
+    <string name="text_center_dot">•</string>
+
+
 </resources>

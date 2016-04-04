@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#49A06F</color>
+    <color name="colorPrimary">#009C80</color>
     <color name="colorPrimaryDark">#FAFAFA</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTheme">#009C80</color>
+    <color name="colorThemeLight">#7CD6C9</color>
+    <color name="colorContentBG">#EEEEEE</color>
+    <color name="colorContentdark">#D4D4D4</color>
+    <color name="colorIndicator">#FFFF00</color>
+    <color name="colorSwipeRefresh01">#009C80</color>
+    <color name="colorSwipeRefresh02">#1BAFC3</color>
+    <color name="colorSwipeRefresh03">#FF4081</color>
+    <color name="colorSwipeRefresh04">#EE80CD</color>
+    <color name="colorLayoutPressed">#207F7F7F</color>
+    <color name="colorImageBG">#C5DCDF</color>
 </resources>
