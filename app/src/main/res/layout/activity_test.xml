@@ -6,11 +6,13 @@
     android:orientation="vertical">
 
     <com.nightonke.boommenu.BoomMenuButton
-        android:id="@+id/boom"
+        android:id="@+id/boombtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
+        app:boom_button_color="@color/colorTheme"
+        app:boom_button_pressed_color="@color/colorIndicator"
         app:boom_inActionBar="false" />
 
 </FrameLayout>
