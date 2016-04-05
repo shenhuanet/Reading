@@ -45,4 +45,5 @@ dependencies {
     compile files('libs/image-loader.jar')
     compile project(':giflibrary')
     compile project(':ripplelibrary')
+    compile project(path: ':boommenu')
 }

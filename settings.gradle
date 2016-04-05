@@ -1,1 +1,1 @@
-include ':giflibrary', ':app', ':ripplelibrary'
+include ':giflibrary', ':app', ':ripplelibrary', ':boommenu'

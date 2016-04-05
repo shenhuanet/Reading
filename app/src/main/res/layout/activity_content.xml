@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/content_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:navigationIcon="@mipmap/ic_back"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="title"
+        app:titleTextColor="#ffffff" />
+
+    <ProgressBar
+        android:id="@+id/content_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@id/content_toolbar"
+        android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/horizontal_progressbar" />
 
     <ProgressBar
         android:id="@+id/content_pro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/content_progressbar"
         android:layout_centerHorizontal="true"
         android:indeterminateDrawable="@drawable/cricle_dot_loading"
         android:indeterminateDuration="1000" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/content_pro">
+
+        <WebView
+            android:id="@+id/content_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/content_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="#66E8E8E8"
+            android:drawableLeft="@mipmap/ic_net_32"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:padding="5dp"
+            android:text="https://segmentfault.com/a/1190000004864726"
+            android:textColor="@color/colorTheme" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/content_floatbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            app:backgroundTint="@color/colorTheme"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:rippleColor="@color/colorIndicator" />
+
+    </FrameLayout>
 
 </RelativeLayout>

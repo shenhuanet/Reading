@@ -44,12 +44,15 @@
                     android:id="@+id/kf_item_drecit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_see"
                     android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/kf_item_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@mipmap/ic_like"
                     android:textSize="10sp" />
 
                 <TextView

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,7 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static FragmentKanyuanDaima instance = null;
     private View view;
@@ -37,6 +38,23 @@ public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private List<MyDatasBean> datas = null;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void dispatchMessage(Message msg) {
+            super.dispatchMessage(msg);
+            switch (msg.what) {
+                case -1:
+                    refreshLayout.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshLayout.setRefreshing(false);
+                        }
+                    });
+                    break;
+            }
+        }
+    };
 
     public static FragmentKanyuanDaima newInstance() {
         if (instance == null) {
@@ -116,9 +134,11 @@ public class FragmentKanyuanDaima extends Fragment implements SwipeRefreshLayout
                         }
                     } else {
                         System.out.println("数据为空 ");
+                        handler.obtainMessage(-1);
                     }
                 } catch (IOException e) {
                     System.out.println("请求错误");
+                    handler.obtainMessage(-1);
                     e.printStackTrace();
                 }
                 return null;

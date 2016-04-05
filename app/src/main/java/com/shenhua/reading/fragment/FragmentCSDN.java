@@ -28,6 +28,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FragmentCSDN extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -103,7 +106,8 @@ public class FragmentCSDN extends Fragment implements SwipeRefreshLayout.OnRefre
                         for (Element content : main) {
                             MyDatasBean data = new MyDatasBean();
                             data.setTitle(content.getElementsByTag("h1").text().trim());
-                            data.setUrl(content.getElementsByTag("h1").get(0).getElementsByTag("a").attr("href").trim());
+                            String url = content.getElementsByTag("h1").get(0).getElementsByTag("a").attr("href").trim();
+                            data.setUrl(getMobileUrl(url, url + "f"));
                             data.setDescribe("\u3000\u3000" + content.getElementsByTag("dd").text().trim());
                             data.setNick(content.getElementsByClass("fl").get(0).getElementsByTag("a").get(0).text().trim());
                             data.setTime(content.getElementsByClass("time").text().trim());
@@ -146,5 +150,16 @@ public class FragmentCSDN extends Fragment implements SwipeRefreshLayout.OnRefre
 
         task.execute();
 
+    }
+
+    private String getMobileUrl(String url, String str) {
+        Pattern p = Pattern.compile(".*?details/(.*?)f");
+        Matcher m = p.matcher(str);
+        while (m.find()) {
+            MatchResult result = m.toMatchResult();
+//            System.out.println(MyStringUtils.URL_CSDN_YD_M + result.group(1));
+            return MyStringUtils.URL_CSDN_YD_M + result.group(1);
+        }
+        return url;
     }
 }

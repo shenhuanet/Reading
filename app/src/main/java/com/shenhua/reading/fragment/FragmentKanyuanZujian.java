@@ -157,16 +157,6 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                initDatas();
-            }
-        }).start();
+        initDatas();
     }
 }
