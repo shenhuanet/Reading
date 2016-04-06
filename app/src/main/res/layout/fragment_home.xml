@@ -1,66 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorContentBG"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp">
+        android:layout_height="match_parent"
+        android:background="@color/colorContentBG"
+        android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/home_textinput"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.3">
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp">
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/home_et"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/home_textinput"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:focusable="false"
-                android:hint="一框一世界"
-                android:textColorHint="@color/colorPrimaryDark" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_weight="0.3">
 
-        <com.andexert.library.RippleView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            ripple:rv_type="rectangle">
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/home_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:focusable="false"
+                    android:hint="一框一世界"
+                    android:textColorHint="@color/colorPrimaryDark" />
+            </android.support.design.widget.TextInputLayout>
 
-            <android.support.v7.widget.AppCompatTextView
+            <com.andexert.library.RippleView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@color/colorTheme"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="找一找"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:layout_height="match_parent"
+                ripple:rv_type="rectangle">
 
-        </com.andexert.library.RippleView>
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@color/colorTheme"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="找一找"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+
+            </com.andexert.library.RippleView>
+
+        </LinearLayout>
+
+        <com.shenhua.reading.view.MyListView
+            android:id="@+id/home_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="5dp"
+            android:scrollbars="none" />
 
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/home_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@null"
-        android:dividerHeight="5dp"
-        android:scrollbars="none" />
-
-</LinearLayout>
+</ScrollView>

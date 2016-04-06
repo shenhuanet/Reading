@@ -55,7 +55,7 @@ public class FragmentHome extends Fragment {
         AsyncTask task = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 4; i++) {
                     data = new HistoryData();
                     data.setTitle("这是标题...");
                     data.setDescribe("\u3000\u3000" + "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述");
