@@ -14,4 +14,7 @@
     <color name="colorSwipeRefresh04">#EE80CD</color>
     <color name="colorLayoutPressed">#207F7F7F</color>
     <color name="colorImageBG">#C5DCDF</color>
+    <color name="colorMaterialWhite">#F9F9F9</color>
+    <color name="colorItemBule">#44BBFF</color>
+    <color name="colorItemYellow">#EECD30</color>
 </resources>
