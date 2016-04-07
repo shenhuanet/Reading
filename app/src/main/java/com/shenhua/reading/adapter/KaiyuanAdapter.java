@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Shenhua on 4/2/2016.
  */
-public class KaiyuanAdapter extends RecyclerView.Adapter<KaiyuanViewHolder> implements View.OnClickListener {
+public class KaiyuanAdapter extends RecyclerView.Adapter<KaiyuanAdapter.KaiyuanViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<MyDatasBean> datas;
@@ -43,12 +43,24 @@ public class KaiyuanAdapter extends RecyclerView.Adapter<KaiyuanViewHolder> impl
         holder.itemView.setTag(bean.getUrl());//将数据保存在Tag中，以便点击时进行获取
     }
 
+    public class KaiyuanViewHolder extends RecyclerView.ViewHolder {
+
+        TextView title, describe, time;
+
+        public KaiyuanViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.os_item_title);
+            describe = (TextView) itemView.findViewById(R.id.os_item_describe);
+            time = (TextView) itemView.findViewById(R.id.os_item_time);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return datas.size();
     }
 
-    public static interface OnRecItemClickLisenner {
+    public interface OnRecItemClickLisenner {
         void onItemClick(View view, String data);
     }
 
@@ -62,17 +74,5 @@ public class KaiyuanAdapter extends RecyclerView.Adapter<KaiyuanViewHolder> impl
 
     public void setOnRecItemClickLisenner(OnRecItemClickLisenner lisenner) {
         this.lisenner = lisenner;
-    }
-}
-
-class KaiyuanViewHolder extends RecyclerView.ViewHolder {
-
-    TextView title, describe, time;
-
-    public KaiyuanViewHolder(View itemView) {
-        super(itemView);
-        title = (TextView) itemView.findViewById(R.id.os_item_title);
-        describe = (TextView) itemView.findViewById(R.id.os_item_describe);
-        time = (TextView) itemView.findViewById(R.id.os_item_time);
     }
 }

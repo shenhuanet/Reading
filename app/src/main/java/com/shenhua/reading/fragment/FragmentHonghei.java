@@ -78,7 +78,7 @@ public class FragmentHonghei extends Fragment implements SwipeRefreshLayout.OnRe
             options = new DisplayImageOptions.Builder()
                     .cacheInMemory(true)
                     .cacheOnDisc(true).bitmapConfig(Bitmap.Config.ARGB_8888)
-                    .imageScaleType(ImageScaleType.EXACTLY).build();
+                    .imageScaleType(ImageScaleType.NONE).build();
         }
         ViewGroup parent = (ViewGroup) view.getParent();
         if (parent != null)
@@ -146,17 +146,6 @@ public class FragmentHonghei extends Fragment implements SwipeRefreshLayout.OnRe
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     refreshLayout.setRefreshing(false);
-                    adapter.setOnRecItemClickLisenner(new HongheiAdapter.OnRecItemClickLisenner() {
-                        @Override
-                        public void onItemClick(View view, final String data) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
-                                }
-                            }, 1000);
-                        }
-                    });
                 }
             }
         };

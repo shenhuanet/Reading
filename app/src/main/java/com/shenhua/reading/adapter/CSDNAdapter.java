@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by shenhua on 2016/3/30.
  */
-public class CSDNAdapter extends RecyclerView.Adapter<CsdnViewHolder> implements View.OnClickListener {
+public class CSDNAdapter extends RecyclerView.Adapter<CSDNAdapter.CsdnViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<MyDatasBean> datas;
@@ -47,23 +47,29 @@ public class CSDNAdapter extends RecyclerView.Adapter<CsdnViewHolder> implements
         holder.itemView.setTag(d.getUrl());//将数据保存在Tag中，以便点击时进行获取
     }
 
+    public class CsdnViewHolder extends RecyclerView.ViewHolder {
+        TextView title, describe, nick, time, comment, read;
+
+        public CsdnViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.cs_item_title);
+            describe = (TextView) itemView.findViewById(R.id.cs_item_describe);
+            nick = (TextView) itemView.findViewById(R.id.cs_item_nick);
+            time = (TextView) itemView.findViewById(R.id.cs_item_time);
+            comment = (TextView) itemView.findViewById(R.id.cs_item_comment);
+            read = (TextView) itemView.findViewById(R.id.cs_item_read);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return datas.size();
     }
 
-    /**
-     * declare interface
-     */
-    public static interface OnRecyclerViewItemClickListener {
+    public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, String data);
     }
 
-    /**
-     * override onClick
-     *
-     * @param v
-     */
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
@@ -71,27 +77,7 @@ public class CSDNAdapter extends RecyclerView.Adapter<CsdnViewHolder> implements
         }
     }
 
-    /**
-     * OnItemClickListener outside call
-     *
-     * @param listener
-     */
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
-    }
-}
-
-class CsdnViewHolder extends RecyclerView.ViewHolder {
-    TextView title, describe, nick, time, comment, read;
-
-    public CsdnViewHolder(View itemView) {
-        super(itemView);
-        //findviewbyid
-        title = (TextView) itemView.findViewById(R.id.cs_item_title);
-        describe = (TextView) itemView.findViewById(R.id.cs_item_describe);
-        nick = (TextView) itemView.findViewById(R.id.cs_item_nick);
-        time = (TextView) itemView.findViewById(R.id.cs_item_time);
-        comment = (TextView) itemView.findViewById(R.id.cs_item_comment);
-        read = (TextView) itemView.findViewById(R.id.cs_item_read);
     }
 }

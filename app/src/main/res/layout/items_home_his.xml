@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_item_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layoutitem_selector"
@@ -10,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/day_11" />
+        android:src="@mipmap/list_item_bule" />
 
     <LinearLayout
         android:id="@+id/home_item_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/colorItemBule"
+        android:background="@drawable/corners_item_bule"
         android:orientation="vertical">
 
         <TextView
@@ -26,9 +27,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:padding="5dp"
+            android:padding="2dp"
             android:text="12313213213"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -39,16 +39,16 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="miaoshu"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/home_item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:padding="5dp"
+            android:padding="2dp"
             android:text="2016-04-13"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
     </LinearLayout>
 

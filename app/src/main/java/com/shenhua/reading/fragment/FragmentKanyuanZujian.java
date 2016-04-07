@@ -138,17 +138,17 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     refreshLayout.setRefreshing(false);
-                    adapter.setOnItemClickListener(new KanyuanZujianAdapter.OnRecyclerViewItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, final String data) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
-                                }
-                            }, 1000);
-                        }
-                    });
+//                    adapter.setOnItemClickListener(new KanyuanZujianAdapter.OnRecyclerViewItemClickListener() {
+//                        @Override
+//                        public void onItemClick(View view, final String data) {
+//                            new Handler().postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
+//                                }
+//                            }, 1000);
+//                        }
+//                    });
                 }
             }
         };
