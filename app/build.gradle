@@ -46,4 +46,5 @@ dependencies {
     compile project(':giflibrary')
     compile project(':ripplelibrary')
     compile project(path: ':boommenu')
+    compile project(':boommenu')
 }
