@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by shenhua on 2016/3/30.
  */
-public class KanyuanDaimaAdapter extends RecyclerView.Adapter<KanyuanDaimaViewHolder> implements View.OnClickListener {
+public class KanyuanDaimaAdapter extends RecyclerView.Adapter<KanyuanDaimaAdapter.KanyuanDaimaViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<MyDatasBean> datas;
@@ -48,6 +48,21 @@ public class KanyuanDaimaAdapter extends RecyclerView.Adapter<KanyuanDaimaViewHo
         holder.itemView.setTag(d.getUrl());//将数据保存在Tag中，以便点击时进行获取
     }
 
+    public class KanyuanDaimaViewHolder extends RecyclerView.ViewHolder {
+        TextView title, describe, nick, time, comment, read, like;
+
+        public KanyuanDaimaViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.ky_item_title);
+            describe = (TextView) itemView.findViewById(R.id.ky_item_describe);
+            nick = (TextView) itemView.findViewById(R.id.ky_item_nick);
+            time = (TextView) itemView.findViewById(R.id.ky_item_time);
+            comment = (TextView) itemView.findViewById(R.id.ky_item_comment);
+            read = (TextView) itemView.findViewById(R.id.ky_item_read);
+            like = (TextView) itemView.findViewById(R.id.ky_item_like);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return datas.size();
@@ -56,7 +71,7 @@ public class KanyuanDaimaAdapter extends RecyclerView.Adapter<KanyuanDaimaViewHo
     /**
      * declare interface
      */
-    public static interface OnRecyclerViewItemClickListener {
+    public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, String data);
     }
 
@@ -82,19 +97,5 @@ public class KanyuanDaimaAdapter extends RecyclerView.Adapter<KanyuanDaimaViewHo
     }
 }
 
-class KanyuanDaimaViewHolder extends RecyclerView.ViewHolder {
-    TextView title, describe, nick, time, comment, read, like;
 
-    public KanyuanDaimaViewHolder(View itemView) {
-        super(itemView);
-        //findviewbyid
-        title = (TextView) itemView.findViewById(R.id.ky_item_title);
-        describe = (TextView) itemView.findViewById(R.id.ky_item_describe);
-        nick = (TextView) itemView.findViewById(R.id.ky_item_nick);
-        time = (TextView) itemView.findViewById(R.id.ky_item_time);
-        comment = (TextView) itemView.findViewById(R.id.ky_item_comment);
-        read = (TextView) itemView.findViewById(R.id.ky_item_read);
-        like = (TextView) itemView.findViewById(R.id.ky_item_like);
-    }
-}
 

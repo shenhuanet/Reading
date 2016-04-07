@@ -19,5 +19,5 @@ public class MyStringUtils {
     public static final String URL_JCODE = "http://www.jcodecraeer.com/plus/list.php?tid=16";//泡在网上的日子
 
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36";
-
+    public static String[] RandomColors = {"#F44336", "#E91E63", "#9C27B0", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548", "#9E9E9E", "#607D8B"};
 }

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Shenhua on 4/2/2016.
  */
-public class TuikuAdapter extends RecyclerView.Adapter<TuikuViewHolder> implements View.OnClickListener {
+public class TuikuAdapter extends RecyclerView.Adapter<TuikuAdapter.TuikuViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<MyDatasBean> datas;
@@ -58,12 +58,27 @@ public class TuikuAdapter extends RecyclerView.Adapter<TuikuViewHolder> implemen
             imageLoader.displayImage(bean.getImgUrl(), holder.iv, options);
     }
 
+    public class TuikuViewHolder extends RecyclerView.ViewHolder {
+
+        TextView title, describe, time, nick;
+        ImageView iv;
+
+        public TuikuViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.tk_item_title);
+            describe = (TextView) itemView.findViewById(R.id.tk_item_describe);
+            time = (TextView) itemView.findViewById(R.id.tk_item_time);
+            nick = (TextView) itemView.findViewById(R.id.tk_item_nick);
+            iv = (ImageView) itemView.findViewById(R.id.tk_item_iv);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return datas.size();
     }
 
-    public static interface OnRecItemClickLisenner {
+    public interface OnRecItemClickLisenner {
         void onItemClick(View view, String data);
     }
 
@@ -72,25 +87,9 @@ public class TuikuAdapter extends RecyclerView.Adapter<TuikuViewHolder> implemen
         if (lisenner != null) {
             lisenner.onItemClick(v, (String) v.getTag());
         }
-
     }
 
     public void setOnRecItemClickLisenner(OnRecItemClickLisenner lisenner) {
         this.lisenner = lisenner;
-    }
-}
-
-class TuikuViewHolder extends RecyclerView.ViewHolder {
-
-    TextView title, describe, time, nick;
-    ImageView iv;
-
-    public TuikuViewHolder(View itemView) {
-        super(itemView);
-        title = (TextView) itemView.findViewById(R.id.tk_item_title);
-        describe = (TextView) itemView.findViewById(R.id.tk_item_describe);
-        time = (TextView) itemView.findViewById(R.id.tk_item_time);
-        nick = (TextView) itemView.findViewById(R.id.tk_item_nick);
-        iv = (ImageView) itemView.findViewById(R.id.tk_item_iv);
     }
 }

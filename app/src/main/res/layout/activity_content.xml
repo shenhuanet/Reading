@@ -16,33 +16,16 @@
         app:title="title"
         app:titleTextColor="#ffffff" />
 
-    <ProgressBar
-        android:id="@+id/content_progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@id/content_toolbar"
-        android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
-        android:indeterminateOnly="false"
-        android:progressDrawable="@drawable/horizontal_progressbar" />
-
-    <ProgressBar
-        android:id="@+id/content_pro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/content_progressbar"
-        android:layout_centerHorizontal="true"
-        android:indeterminateDrawable="@drawable/cricle_dot_loading"
-        android:indeterminateDuration="1000" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/content_pro">
+        android:layout_below="@+id/content_toolbar">
 
         <WebView
             android:id="@+id/content_web"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
 
         <TextView
             android:id="@+id/content_info"
@@ -58,17 +41,35 @@
             android:text="https://segmentfault.com/a/1190000004864726"
             android:textColor="@color/colorTheme" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/content_floatbtn"
+        <ProgressBar
+            android:id="@+id/content_pro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
-            app:backgroundTint="@color/colorTheme"
-            app:borderWidth="0dp"
-            app:elevation="6dp"
-            app:rippleColor="@color/colorIndicator" />
+            android:layout_gravity="top|center"
+            android:indeterminateDrawable="@drawable/cricle_dot_loading"
+            android:indeterminateDuration="1000" />
+
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/boombtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            app:boom_button_color="@color/colorTheme"
+            app:boom_button_pressed_color="@color/colorIndicator"
+            app:boom_inActionBar="false" />
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/content_floatbtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="right|bottom"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--app:backgroundTint="@color/colorTheme"-->
+        <!--app:borderWidth="0dp"-->
+        <!--app:elevation="6dp"-->
+        <!--app:rippleColor="@color/colorIndicator" />-->
 
     </FrameLayout>
 

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by shenhua on 2016/3/30.
  */
-public class KaifazheAdapter extends RecyclerView.Adapter<KaifazheViewHolder> implements View.OnClickListener {
+public class KaifazheAdapter extends RecyclerView.Adapter<KaifazheAdapter.KaifazheViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<MyDatasBean> datas;
@@ -54,6 +54,20 @@ public class KaifazheAdapter extends RecyclerView.Adapter<KaifazheViewHolder> im
         imageLoader.displayImage(d.getImgUrl(), holder.iv, options);
     }
 
+    public class KaifazheViewHolder extends RecyclerView.ViewHolder {
+        TextView title, nick, comment, from, thumb;
+        ImageView iv;
+        public KaifazheViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.kf_item_title);
+            nick = (TextView) itemView.findViewById(R.id.kf_item_drecit);
+            comment = (TextView) itemView.findViewById(R.id.kf_item_comment);
+            from = (TextView) itemView.findViewById(R.id.kf_item_from);
+            thumb = (TextView) itemView.findViewById(R.id.kf_item_thumbs);
+            iv= (ImageView) itemView.findViewById(R.id.kf_item_iv);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return datas.size();
@@ -62,7 +76,7 @@ public class KaifazheAdapter extends RecyclerView.Adapter<KaifazheViewHolder> im
     /**
      * declare interface
      */
-    public static interface OnRecyclerViewItemClickListener {
+    public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, String data);
     }
 
@@ -85,21 +99,6 @@ public class KaifazheAdapter extends RecyclerView.Adapter<KaifazheViewHolder> im
      */
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
-    }
-}
-
-class KaifazheViewHolder extends RecyclerView.ViewHolder {
-    TextView title, nick, comment, from, thumb;
-    ImageView iv;
-    public KaifazheViewHolder(View itemView) {
-        super(itemView);
-        //findviewbyid
-        title = (TextView) itemView.findViewById(R.id.kf_item_title);
-        nick = (TextView) itemView.findViewById(R.id.kf_item_drecit);
-        comment = (TextView) itemView.findViewById(R.id.kf_item_comment);
-        from = (TextView) itemView.findViewById(R.id.kf_item_from);
-        thumb = (TextView) itemView.findViewById(R.id.kf_item_thumbs);
-        iv= (ImageView) itemView.findViewById(R.id.kf_item_iv);
     }
 }
 
