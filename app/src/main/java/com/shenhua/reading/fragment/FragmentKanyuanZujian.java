@@ -76,6 +76,25 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
                     .showImageOnFail(R.mipmap.ic_imgload_error).cacheInMemory(true)
                     .cacheOnDisc(true).bitmapConfig(Bitmap.Config.ARGB_8888)
                     .imageScaleType(ImageScaleType.EXACTLY).build();
+            recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (mImageLoader != null) {
+                        switch (newState) {
+                            case 0://屏幕停止滚动
+                                mImageLoader.resume();
+                                break;
+                            case 1://正在滚动
+                                mImageLoader.pause();
+                                break;
+                            case 2://快速滚动
+                                mImageLoader.pause();
+                                break;
+                        }
+                    }
+                }
+            });
         }
         ViewGroup parent = (ViewGroup) view.getParent();
         if (parent != null) {
@@ -138,17 +157,6 @@ public class FragmentKanyuanZujian extends Fragment implements SwipeRefreshLayou
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
                     refreshLayout.setRefreshing(false);
-//                    adapter.setOnItemClickListener(new KanyuanZujianAdapter.OnRecyclerViewItemClickListener() {
-//                        @Override
-//                        public void onItemClick(View view, final String data) {
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
-//                                }
-//                            }, 1000);
-//                        }
-//                    });
                 }
             }
         };
