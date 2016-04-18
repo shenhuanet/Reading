@@ -85,7 +85,6 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         settings.setAllowContentAccess(true);
         settings.setBuiltInZoomControls(false);
         webView.setDrawingCacheEnabled(true);
-        webView.setBackgroundColor(Color.TRANSPARENT);
         webView.setWebViewClient(new MyWebViewClient(content_pro, textView));
     }
 
