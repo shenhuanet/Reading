@@ -5,6 +5,19 @@ package com.shenhua.reading.utils;
  */
 public class MyStringUtils {
 
+    public static final String DB_NAME = "History.db";
+    public static final String TABLE_NAME = "history";
+    public static final int DB_VERSION = 1;
+    public static final int TYPE_CSDN = 1;
+    public static final int TYPE_SENG = 2;
+    public static final int TYPE_JCODE = 3;
+    public static final int TYPE_TUIKU = 4;
+    public static final int TYPE_HONGHEI = 5;
+    public static final int TYPE_KAIYUAN = 6;
+    public static final int TYPE_KAIFAZHE = 7;
+    public static final int TYPE_KAN_DAIMA = 8;
+    public static final int TYPE_KAN_ZUJIAN = 9;
+
     public static final String[] tab_name_array = {"首页", "CSDN", "SegmentFault", "Jcode", "推酷", "红黑联盟", "开源中国", "开发者头条", "看源代码", "看源组件"};
     public static final String URL_KANYUAN_DAIMA = "http://www.see-source.com/android/list.html";//安卓代码分享
     public static final String URL_KANYUAN_ZUJIAN = "http://www.see-source.com/androidwidget/list.html";//安卓组件中心

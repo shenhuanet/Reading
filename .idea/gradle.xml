@@ -16,6 +16,15 @@
             <option value="$PROJECT_DIR$/ripplelibrary" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/boommenu" />
+            <option value="$PROJECT_DIR$/giflibrary" />
+            <option value="$PROJECT_DIR$/ripplelibrary" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
