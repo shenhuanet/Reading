@@ -126,7 +126,6 @@ public class FragmentHonghei extends Fragment implements SwipeRefreshLayout.OnRe
                                 data.setImgUrl("");
                             }
                             datas.add(data);
-
                         }
                     } catch (Exception e) {
                         System.out.println("解析失败");
@@ -149,7 +148,6 @@ public class FragmentHonghei extends Fragment implements SwipeRefreshLayout.OnRe
                 }
             }
         };
-
         task.execute();
     }
 

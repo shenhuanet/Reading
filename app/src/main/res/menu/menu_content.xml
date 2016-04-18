@@ -4,8 +4,8 @@
     tools:context=".activity.ActivityContentActivity">
     <item
         android:id="@+id/action_web"
-        android:icon="@mipmap/ic_boom_net"
+        android:icon="@mipmap/ic_menu_stop"
         android:orderInCategory="100"
-        android:title="action"
+        android:title="刷新/结束"
         app:showAsAction="always" />
 </menu>

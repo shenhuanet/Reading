@@ -137,7 +137,7 @@ public class FragmentKaiyuan extends Fragment implements SwipeRefreshLayout.OnRe
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
+                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_KAIYUAN));
                                 }
                             }, 1000);
                         }

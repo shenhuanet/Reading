@@ -138,7 +138,7 @@ public class FragmentJcode extends Fragment implements SwipeRefreshLayout.OnRefr
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
+                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_JCODE));
                                 }
                             }, 1000);
                         }

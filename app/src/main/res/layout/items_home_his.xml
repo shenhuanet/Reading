@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:padding="2dp"
+            android:padding="5dp"
             android:text="12313213213"
             android:textColor="@android:color/white" />
 
@@ -38,6 +38,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
+            android:paddingLeft="5dp"
             android:text="miaoshu"
             android:textSize="12sp" />
 

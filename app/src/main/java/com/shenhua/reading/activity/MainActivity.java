@@ -35,6 +35,7 @@ import com.shenhua.reading.fragment.FragmentKaifazhe;
 import com.shenhua.reading.fragment.FragmentKaiyuan;
 import com.shenhua.reading.fragment.FragmentKanyuanDaima;
 import com.shenhua.reading.fragment.FragmentKanyuanZujian;
+import com.shenhua.reading.fragment.FragmentOpen;
 import com.shenhua.reading.fragment.FragmentSegf;
 import com.shenhua.reading.fragment.FragmentTuiku;
 import com.shenhua.reading.utils.MyStringUtils;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment[] fragments = {FragmentHome.newInstance(), FragmentCSDN.newInstance(), FragmentSegf.newInstance(),
             FragmentJcode.newInstance(), FragmentTuiku.newInstance(), FragmentHonghei.newInstance(), FragmentKaiyuan.newInstance(),
-            FragmentKaifazhe.newInstance(), FragmentKanyuanDaima.newInstance(), FragmentKanyuanZujian.newInstance()};
+            FragmentKaifazhe.newInstance(), FragmentKanyuanDaima.newInstance(), FragmentKanyuanZujian.newInstance(), FragmentOpen.newInstance()};
     private View mCustomView;
     private BoomMenuButton boomInfo;
     private boolean isInit = false;

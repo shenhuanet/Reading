@@ -11,10 +11,12 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:navigationIcon="@mipmap/ic_back"
+        app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="title"
-        app:titleTextColor="#ffffff" />
+        app:titleTextAppearance="?android:attr/textAppearanceSmall"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -55,21 +57,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
-            app:boom_button_color="@color/colorTheme"
+            app:boom_button_color="#88009C80"
             app:boom_button_pressed_color="@color/colorIndicator"
             app:boom_inActionBar="false" />
-
-        <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/content_floatbtn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="right|bottom"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--app:backgroundTint="@color/colorTheme"-->
-        <!--app:borderWidth="0dp"-->
-        <!--app:elevation="6dp"-->
-        <!--app:rippleColor="@color/colorIndicator" />-->
 
     </FrameLayout>
 

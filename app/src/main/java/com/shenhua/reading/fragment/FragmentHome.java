@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.shenhua.reading.R;
 import com.shenhua.reading.adapter.MyHomeListAdapter;
 import com.shenhua.reading.bean.HistoryData;
+import com.shenhua.reading.bean.MyHistoryDBdao;
 import com.shenhua.reading.utils.SpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ public class FragmentHome extends Fragment {
     private AppCompatEditText editText;
     private RecyclerView list;
     private List<HistoryData> datas = new ArrayList<HistoryData>();
-    private HistoryData data = null;
+//    private HistoryData data = null;
     private MyHomeListAdapter adapter;
+    private MyHistoryDBdao dBdao;
 
     public static FragmentHome newInstance() {
         if (instance == null) {
@@ -63,16 +65,19 @@ public class FragmentHome extends Fragment {
             @Override
             protected Object doInBackground(Object[] params) {
                 for (int i = 0; i < 10; i++) {
-                    data = new HistoryData();
-                    data.setTitle("这是标题..." + Integer.toString(i));
-                    data.setDescribe("\u3000\u3000" + "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述");
-                    data.setTime("2016-04-06");
-                    data.setUrl("http:" + Integer.toString(i));
-                    if (i % 2 == 0)
-                        data.setType(2);//yellow
-                    else
-                        data.setType(1);//blue
-                    datas.add(data);
+//                    data = new HistoryData();
+                    dBdao = new MyHistoryDBdao(getContext());
+                    dBdao.open();
+//                    data.setTitle("这是标题..." + Integer.toString(i));
+//                    data.setDescribe("\u3000\u3000" + "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述");
+//                    data.setTime("2016-04-06");
+//                    data.setUrl("http:" + Integer.toString(i));
+//                    if (i % 2 == 0)
+//                        data.setType(2);//yellow
+//                    else
+//                        data.setType(1);//blue
+//                    datas.add(data);
+                    datas = dBdao.getAllDatas();
                 }
                 return null;
             }
@@ -83,6 +88,7 @@ public class FragmentHome extends Fragment {
                 adapter = new MyHomeListAdapter(getContext(), datas);
                 adapter.notifyDataSetChanged();
                 list.setAdapter(adapter);
+                dBdao.close();
                 adapter.setOnItemClickListener(new MyHomeListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, String data) {

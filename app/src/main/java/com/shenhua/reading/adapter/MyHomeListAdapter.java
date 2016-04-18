@@ -40,7 +40,7 @@ public class MyHomeListAdapter extends RecyclerView.Adapter<MyHomeListAdapter.Ho
     public void onBindViewHolder(HomeHolder holder, int position) {
         HistoryData data = datas.get(position);
         holder.title.setText(data.getTitle());
-        holder.describe.setText(data.getDescribe());
+        holder.describe.setText(data.getUrl());
         holder.time.setText(data.getTime());
         if (data.getType() == 1) {
             holder.iv.setImageResource(R.mipmap.list_item_bule);

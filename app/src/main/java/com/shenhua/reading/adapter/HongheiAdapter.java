@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shenhua.reading.R;
 import com.shenhua.reading.activity.ActivityContentActivity;
 import com.shenhua.reading.bean.MyDatasBean;
+import com.shenhua.reading.utils.MyStringUtils;
 
 import java.util.List;
 
@@ -53,7 +54,6 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
         return datas.size();
     }
 
-
     public class HongheiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         View layout;
         TextView title, describe, time;
@@ -86,7 +86,7 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()));
+                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_HONGHEI));
                         }
                     }, 1000);
                     break;
