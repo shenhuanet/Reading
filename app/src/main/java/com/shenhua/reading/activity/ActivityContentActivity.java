@@ -8,8 +8,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
@@ -25,18 +26,19 @@ import com.nightonke.boommenu.Types.OrderType;
 import com.nightonke.boommenu.Types.PlaceType;
 import com.nightonke.boommenu.Util;
 import com.shenhua.reading.R;
+import com.shenhua.reading.bean.HistoryData;
+import com.shenhua.reading.bean.MyHistoryDBdao;
 import com.shenhua.reading.utils.MyStringUtils;
 import com.shenhua.reading.utils.MyWebViewClient;
 
 import java.util.Random;
 
-public class ActivityContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener{
+public class ActivityContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
 
     private String url = "";
     private ProgressBar content_pro;
     private WebView webView;
     private TextView textView;
-
     private BoomMenuButton boomMenuButton;
     private boolean isInit = false;
 
@@ -97,11 +99,48 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
 
     @Override
     public void onClick(int buttonIndex) {
-        Toast.makeText(this, "On click " +
-                boomMenuButton.getTextViews()[buttonIndex].getText().toString() +
-                " button", Toast.LENGTH_SHORT).show();
+        MyHistoryDBdao mdao = new MyHistoryDBdao(getApplicationContext());
+        mdao.open();
+        switch (buttonIndex) {
+            case 0:
+
+                break;
+            case 1:
+                HistoryData data = new HistoryData();
+                data.setUrl(url);
+                data.setTime("2016-04-15");
+                data.setDescribe("描述。。。。");
+                data.setTitle("title");
+                data.setType(1);
+                if (mdao.insertTodb(data) > 0) showToast("收藏成功！");
+                else showToast("收藏失败！");
+                break;
+            case 2:
+
+                break;
+            case 3:
+                Toast.makeText(this, "On click " +
+                        boomMenuButton.getTextViews()[buttonIndex].getText().toString() +
+                        " button", Toast.LENGTH_SHORT).show();
+                break;
+        }
         if (boomMenuButton.isClosed() == false)
             boomMenuButton.dismiss();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_content, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_web) {
+            showToast("hahahhahahahah");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public int GetRandomColor() {
@@ -145,5 +184,9 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             initBoom();
         }
         isInit = true;
+    }
+
+    public void showToast(String str) {
+        Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }
 }
