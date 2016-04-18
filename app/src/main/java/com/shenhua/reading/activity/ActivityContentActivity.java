@@ -1,6 +1,9 @@
 package com.shenhua.reading.activity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,8 +14,10 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,18 +34,21 @@ import com.shenhua.reading.R;
 import com.shenhua.reading.bean.HistoryData;
 import com.shenhua.reading.bean.MyHistoryDBdao;
 import com.shenhua.reading.utils.MyStringUtils;
-import com.shenhua.reading.utils.MyWebViewClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class ActivityContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
 
-    private String url = "";
+    private String _url = "", _title = "";
+    private int _type = 0;
     private ProgressBar content_pro;
     private WebView webView;
     private TextView textView;
     private BoomMenuButton boomMenuButton;
     private boolean isInit = false;
+    public boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +60,15 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
 
     private void initData() {
         Intent intent = getIntent();
-        url = intent.getStringExtra("url");
-        textView.setText(url);
-        System.out.println(url);
-        webView.loadUrl(url);
+        _url = intent.getStringExtra("url");
+        _type = intent.getIntExtra("type", 0);
+        System.out.println(_url);
+        webView.loadUrl(_url);
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +94,14 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         settings.setAllowContentAccess(true);
         settings.setBuiltInZoomControls(false);
         webView.setDrawingCacheEnabled(true);
-        webView.setWebViewClient(new MyWebViewClient(content_pro, textView));
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                toolbar.setTitle(title);
+            }
+        });
+        webView.setWebViewClient(new MyWebViewClient());
     }
 
     @Override
@@ -101,31 +117,50 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
     public void onClick(int buttonIndex) {
         MyHistoryDBdao mdao = new MyHistoryDBdao(getApplicationContext());
         mdao.open();
+        _title = webView.getTitle();
+        _url = webView.getUrl();
         switch (buttonIndex) {
-            case 0:
-
+            case 0://copyurl
+                ClipboardManager myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData myClip = ClipData.newPlainText("text", _url.trim());
+                myClipboard.setPrimaryClip(myClip);
+                showToast("已复制网址到剪切板");
                 break;
-            case 1:
+            case 1://shoucang
                 HistoryData data = new HistoryData();
-                data.setUrl(url);
-                data.setTime("2016-04-15");
-                data.setDescribe("描述。。。。");
-                data.setTitle("title");
-                data.setType(1);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date now = new Date();
+                data.setTime(dateFormat.format(now));
+                data.setUrl(_url);
+                data.setDescribe(_url);
+                data.setTitle(_title);
+                data.setType(_type);
                 if (mdao.insertTodb(data) > 0) showToast("收藏成功！");
                 else showToast("收藏失败！");
                 break;
-            case 2:
-
+            case 2://send
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TITLE, "分享Reading文章链接");
+                intent.putExtra(Intent.EXTRA_TEXT, "标题：" + _title + "\n链接：" + _url);
+                Intent chooserIntent = Intent.createChooser(intent, "请选择一个要发送的应用：");
+                if (chooserIntent == null) {
+                    return;
+                }
+                try {
+                    startActivity(chooserIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    showToast("发送失败，失败原因：未找到该应用。");
+                }
                 break;
-            case 3:
-                Toast.makeText(this, "On click " +
-                        boomMenuButton.getTextViews()[buttonIndex].getText().toString() +
-                        " button", Toast.LENGTH_SHORT).show();
+            case 3://scroll to top
+                webView.scrollTo(0, 0);
+//                webView.stopLoading();
                 break;
         }
         if (boomMenuButton.isClosed() == false)
-            boomMenuButton.dismiss();
+            mdao.close();
+        boomMenuButton.dismiss();
     }
 
     @Override
@@ -135,12 +170,48 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem menuItem = menu.findItem(R.id.action_web);
+        if (isLoading) menuItem.setIcon(ContextCompat.getDrawable(this, R.mipmap.ic_menu_stop));
+        else menuItem.setIcon(ContextCompat.getDrawable(this, R.mipmap.ic_menu_refresh));
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_web) {
-            showToast("hahahhahahahah");
+            if (isLoading) webView.stopLoading();
+            else webView.reload();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            isLoading = true;
+            invalidateOptionsMenu();
+            content_pro.setVisibility(View.VISIBLE);
+            textView.setText(url);
+            textView.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            isLoading = false;
+            invalidateOptionsMenu();
+            content_pro.setVisibility(View.GONE);
+            textView.setVisibility(View.GONE);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
     }
 
     public int GetRandomColor() {
@@ -164,7 +235,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         int[] drawablesResource = new int[]{R.mipmap.ic_boom_copy, R.mipmap.ic_boom_like, R.mipmap.ic_boom_send, R.mipmap.ic_boom_top};
         for (int i = 0; i < number; i++)
             drawables[i] = ContextCompat.getDrawable(this, drawablesResource[i]);
-        String[] STRINGS = new String[]{"复制网址", "收藏到本地", "发送", "置顶"};
+        String[] STRINGS = new String[]{"复制网址", "收藏到本地", "发送", "回到顶部"};
         String[] strings = new String[number];
         for (int i = 0; i < number; i++)
             strings[i] = STRINGS[i];

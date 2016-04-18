@@ -139,7 +139,7 @@ public class FragmentCSDN extends Fragment implements SwipeRefreshLayout.OnRefre
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data));
+                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type", MyStringUtils.TYPE_CSDN));
                                 }
                             }, 1000);
                         }

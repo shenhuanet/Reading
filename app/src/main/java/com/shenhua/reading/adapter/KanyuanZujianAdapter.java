@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shenhua.reading.R;
 import com.shenhua.reading.activity.ActivityContentActivity;
 import com.shenhua.reading.bean.MyDatasBean;
+import com.shenhua.reading.utils.MyStringUtils;
 
 import java.util.List;
 
@@ -69,7 +70,6 @@ public class KanyuanZujianAdapter extends RecyclerView.Adapter<KanyuanZujianAdap
             iv.setTag(data.getImgUrl());//设置imageview的标志
         }
 
-
         public KanyuanZujianViewHolder(View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.kyzj_item_layout);
@@ -89,7 +89,7 @@ public class KanyuanZujianAdapter extends RecyclerView.Adapter<KanyuanZujianAdap
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()));
+                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_KAN_ZUJIAN));
                         }
                     }, 1000);
                     break;
