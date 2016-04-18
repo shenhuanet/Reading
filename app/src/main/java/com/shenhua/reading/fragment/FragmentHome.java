@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shenhua.reading.R;
 import com.shenhua.reading.adapter.MyHomeListAdapter;
@@ -29,7 +30,7 @@ public class FragmentHome extends Fragment {
     private AppCompatEditText editText;
     private RecyclerView list;
     private List<HistoryData> datas = new ArrayList<HistoryData>();
-//    private HistoryData data = null;
+    //    private HistoryData data = null;
     private MyHomeListAdapter adapter;
     private MyHistoryDBdao dBdao;
 
@@ -92,10 +93,15 @@ public class FragmentHome extends Fragment {
                 adapter.setOnItemClickListener(new MyHomeListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, String data) {
-
+                        Toast.makeText(getContext(), "click:" + data, Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                adapter.setOnItemLongClickListener(new MyHomeListAdapter.OnItemLongClickListener() {
+                    @Override
+                    public void onItemLongClick(View view) {
+                        Toast.makeText(getContext(), "long click", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         };
         task.execute();
