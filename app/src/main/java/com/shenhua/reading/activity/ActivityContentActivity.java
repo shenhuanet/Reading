@@ -1,7 +1,9 @@
 package com.shenhua.reading.activity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -50,6 +52,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
     private BoomMenuButton boomMenuButton;
     private boolean isInit = false;
     public boolean isLoading = false;
+    private String JsTag = "img_view";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         webView.loadUrl(_url);
     }
 
+    @SuppressLint("JavascriptInterface")
     private void initView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
         toolbar.setTitle("");
@@ -96,6 +100,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         settings.setAllowContentAccess(true);
         settings.setBuiltInZoomControls(false);
         webView.setDrawingCacheEnabled(true);
+        webView.addJavascriptInterface(new JavascriptInterface(this), JsTag);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
@@ -104,6 +109,38 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             }
         });
         webView.setWebViewClient(new MyWebViewClient());
+    }
+
+    public class JavascriptInterface {
+        private Context context;
+
+        public JavascriptInterface(Context context) {
+            this.context = context;
+        }
+
+        public void openImage(String img) {
+            System.out.println("clickImgUrl:" + img);
+            Toast.makeText(context, "----" + img, Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent();
+//            intent.putExtra("image", img);
+//            intent.setClass(context, ShowWebImageActivity.class);
+//            context.startActivity(intent);
+//            System.out.println(img);
+        }
+    }
+
+    private void addImageClickListner() {
+        // 这段js函数的功能就是，遍历所有的img几点，并添加onclick函数，函数的功能是在图片点击的时候调用本地java接口并传递url过去
+        webView.loadUrl("javascript:(function(){" +
+                "var objs = document.getElementsByTagName(\"img\"); " +
+                "for(var i=0;i<objs.length;i++)  " +
+                "{"
+                + "    objs[i].onclick=function()  " +
+                "    {  "
+                + "        window." + JsTag + ".openImage(this.src);  " +
+                "    }  " +
+                "}" +
+                "})()");
     }
 
     @Override
@@ -235,6 +272,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             invalidateOptionsMenu();
             content_pro.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
+            addImageClickListner();
         }
 
         @Override
