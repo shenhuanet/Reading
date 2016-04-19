@@ -1,19 +1,25 @@
 package com.shenhua.reading.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.shenhua.reading.R;
+import com.shenhua.reading.activity.ActivityContentActivity;
 import com.shenhua.reading.adapter.MyHomeListAdapter;
 import com.shenhua.reading.bean.HistoryData;
 import com.shenhua.reading.bean.MyHistoryDBdao;
@@ -30,9 +36,9 @@ public class FragmentHome extends Fragment {
     private AppCompatEditText editText;
     private RecyclerView list;
     private List<HistoryData> datas = new ArrayList<HistoryData>();
-    //    private HistoryData data = null;
     private MyHomeListAdapter adapter;
     private MyHistoryDBdao dBdao;
+    private static final String[] MENU_ITEMS = {"修 改", "打 开", "删 除"};
 
     public static FragmentHome newInstance() {
         if (instance == null) {
@@ -66,18 +72,8 @@ public class FragmentHome extends Fragment {
             @Override
             protected Object doInBackground(Object[] params) {
                 for (int i = 0; i < 10; i++) {
-//                    data = new HistoryData();
                     dBdao = new MyHistoryDBdao(getContext());
                     dBdao.open();
-//                    data.setTitle("这是标题..." + Integer.toString(i));
-//                    data.setDescribe("\u3000\u3000" + "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述");
-//                    data.setTime("2016-04-06");
-//                    data.setUrl("http:" + Integer.toString(i));
-//                    if (i % 2 == 0)
-//                        data.setType(2);//yellow
-//                    else
-//                        data.setType(1);//blue
-//                    datas.add(data);
                     datas = dBdao.getAllDatas();
                 }
                 return null;
@@ -92,18 +88,42 @@ public class FragmentHome extends Fragment {
                 dBdao.close();
                 adapter.setOnItemClickListener(new MyHomeListAdapter.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, String data) {
-                        Toast.makeText(getContext(), "click:" + data, Toast.LENGTH_SHORT).show();
+                    public void onItemClick(View view, final String data) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type", -1));
+                            }
+                        }, 1000);
                     }
                 });
                 adapter.setOnItemLongClickListener(new MyHomeListAdapter.OnItemLongClickListener() {
                     @Override
                     public void onItemLongClick(View view) {
-                        Toast.makeText(getContext(), "long click", Toast.LENGTH_SHORT).show();
+                        TextView tv = (TextView) view.findViewById(R.id.home_item_describe);
+                        final String url = tv.getText().toString();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setItems(MENU_ITEMS, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", url).putExtra("type", -1));
+                                        break;
+                                    case 2:
+                                        break;
+                                }
+                            }
+                        });
+                        builder.show();
                     }
                 });
             }
         };
         task.execute();
     }
+
+
 }

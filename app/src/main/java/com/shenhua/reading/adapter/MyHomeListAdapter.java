@@ -56,7 +56,7 @@ public class MyHomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((HomeContentHolder) holder).title.setText(data.getTitle());
             ((HomeContentHolder) holder).describe.setText(data.getUrl());
             ((HomeContentHolder) holder).time.setText(data.getTime());
-            if (data.getType() == 1) {
+            if (position % 2 == 0) {
                 ((HomeContentHolder) holder).iv.setImageResource(R.mipmap.list_item_bule);
                 ((HomeContentHolder) holder).layout.setBackground(ContextCompat.getDrawable(context, R.drawable.corners_item_bule));
             } else {

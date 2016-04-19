@@ -139,6 +139,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
                 else showToast("收藏失败！");
                 break;
             case 2://send
+                boomMenuButton.dismiss();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TITLE, "分享Reading文章链接");
@@ -155,12 +156,11 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
                 break;
             case 3://scroll to top
                 webView.scrollTo(0, 0);
-//                webView.stopLoading();
                 break;
         }
         if (boomMenuButton.isClosed() == false)
-            mdao.close();
-        boomMenuButton.dismiss();
+            boomMenuButton.dismiss();
+        mdao.close();
     }
 
     @Override
