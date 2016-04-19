@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +42,7 @@ import java.util.Random;
 
 public class ActivityContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
 
-    private String _url = "", _title = "";
+    private String _url = "", _title = "", imgUrl = "";
     private int _type = 0;
     private ProgressBar content_pro;
     private WebView webView;
@@ -89,6 +90,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         content_pro = (ProgressBar) findViewById(R.id.content_pro);
         webView = (WebView) findViewById(R.id.content_web);
         textView = (TextView) findViewById(R.id.content_info);
+        this.registerForContextMenu(webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setAllowContentAccess(true);
@@ -102,6 +104,34 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             }
         });
         webView.setWebViewClient(new MyWebViewClient());
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuItem.OnMenuItemClickListener handler = new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == 0)
+                    Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        };
+        if (v instanceof WebView) {
+            WebView.HitTestResult result = ((WebView) v).getHitTestResult();
+            int type = result.getType();
+            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                imgUrl = result.getExtra();
+                Toast.makeText(getApplicationContext(), imgUrl, Toast.LENGTH_SHORT).show();
+                menu.add(0, 0, 0, "查看图片")
+                        .setOnMenuItemClickListener(handler);
+                menu.add(0, 1, 0, "保存图片")
+                        .setOnMenuItemClickListener(handler);
+            }
+        }
+
     }
 
     @Override
