@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.adapter.TuikuAdapter;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
@@ -136,7 +136,7 @@ public class FragmentSegf extends Fragment implements SwipeRefreshLayout.OnRefre
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_SENG));
+                                    startActivity(new Intent(getContext(), ContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_SENG));
                                 }
                             }, 1000);
                         }

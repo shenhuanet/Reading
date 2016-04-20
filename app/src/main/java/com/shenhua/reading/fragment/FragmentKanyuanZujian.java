@@ -1,10 +1,8 @@
 package com.shenhua.reading.fragment;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,7 +16,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
 import com.shenhua.reading.adapter.KanyuanZujianAdapter;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;

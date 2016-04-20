@@ -15,8 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
-import com.shenhua.reading.adapter.KaiyuanAdapter;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.adapter.KaiyuanAdapter;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
@@ -30,9 +29,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FragmentOpen extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -97,7 +93,7 @@ public class FragmentOpen extends Fragment implements SwipeRefreshLayout.OnRefre
                             .timeout(5000)
                             .get();
                 } catch (IOException e) {
-                    System.out.println("数据获取失败");
+                    System.out.println("OPEN数据获取失败");
                     e.printStackTrace();
                     return "数据获取失败";
                 }
@@ -113,7 +109,7 @@ public class FragmentOpen extends Fragment implements SwipeRefreshLayout.OnRefre
                             datas.add(data);
                         }
                     } catch (Exception e) {
-                        System.out.println("数据解析失败");
+                        System.out.println("OPEN数据解析失败");
                         e.printStackTrace();
                         return "数据解析失败";
                     }
@@ -138,7 +134,7 @@ public class FragmentOpen extends Fragment implements SwipeRefreshLayout.OnRefre
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_OPEN));
+                                        startActivity(new Intent(getContext(), ContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_OPEN));
                                     }
                                 }, 1000);
                             }

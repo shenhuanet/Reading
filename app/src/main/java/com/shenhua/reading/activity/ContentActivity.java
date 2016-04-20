@@ -42,7 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-public class ActivityContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
+public class ContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
 
     private String _url = "", _title = "", imgUrl = "";
     private int _type = 0;
@@ -78,7 +78,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityContentActivity.this.finish();
+                ContentActivity.this.finish();
             }
         });
         boomMenuButton = (BoomMenuButton) findViewById(R.id.boombtn);
@@ -120,12 +120,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
 
         public void openImage(String img) {
             System.out.println("clickImgUrl:" + img);
-            Toast.makeText(context, "----" + img, Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent();
-//            intent.putExtra("image", img);
-//            intent.setClass(context, ShowWebImageActivity.class);
-//            context.startActivity(intent);
-//            System.out.println(img);
+            context.startActivity(new Intent(context, ViewImgActivity.class).putExtra("url", img));
         }
     }
 
@@ -150,8 +145,8 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == 0)
-                    Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ContentActivity.this, ViewImgActivity.class).putExtra("url", imgUrl));
+                else Toast.makeText(getApplicationContext(), "还未实现", Toast.LENGTH_SHORT).show();
 
                 return true;
             }
@@ -161,7 +156,6 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             int type = result.getType();
             if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
                 imgUrl = result.getExtra();
-                Toast.makeText(getApplicationContext(), imgUrl, Toast.LENGTH_SHORT).show();
                 menu.add(0, 0, 0, "查看图片")
                         .setOnMenuItemClickListener(handler);
                 menu.add(0, 1, 0, "保存图片")

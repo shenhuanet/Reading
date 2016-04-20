@@ -2,7 +2,6 @@ package com.shenhua.reading.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
+import com.shenhua.reading.activity.ViewImgActivity;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
 
@@ -89,12 +88,12 @@ public class KanyuanZujianAdapter extends RecyclerView.Adapter<KanyuanZujianAdap
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_KAN_ZUJIAN));
+                            context.startActivity(new Intent(context, ContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_KAN_ZUJIAN));
                         }
                     }, 1000);
                     break;
                 case R.id.kyzj_item_iv:
-                    Toast.makeText(context, iv.getTag().toString(), Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, ViewImgActivity.class).putExtra("url", iv.getTag().toString()));
                     break;
             }
         }

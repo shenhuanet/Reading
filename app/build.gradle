@@ -47,4 +47,5 @@ dependencies {
     compile project(':ripplelibrary')
     compile project(path: ':boommenu')
     compile project(':boommenu')
+    compile files('libs/picasso-2.5.2.jar')
 }

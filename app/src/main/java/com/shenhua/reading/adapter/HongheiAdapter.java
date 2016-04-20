@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
 
@@ -86,7 +86,7 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_HONGHEI));
+                            context.startActivity(new Intent(context, ContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_HONGHEI));
                         }
                     }, 1000);
                     break;

@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.adapter.KanyuanDaimaAdapter;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
@@ -138,7 +138,7 @@ public class FragmentJcode extends Fragment implements SwipeRefreshLayout.OnRefr
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_JCODE));
+                                    startActivity(new Intent(getContext(), ContentActivity.class).putExtra("url", data).putExtra("type",MyStringUtils.TYPE_JCODE));
                                 }
                             }, 1000);
                         }

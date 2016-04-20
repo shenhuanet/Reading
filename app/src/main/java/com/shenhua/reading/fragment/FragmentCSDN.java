@@ -12,9 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.adapter.CSDNAdapter;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
@@ -97,8 +98,9 @@ public class FragmentCSDN extends Fragment implements SwipeRefreshLayout.OnRefre
                             .timeout(5000)
                             .get();
                 } catch (IOException e) {
-                    System.out.println("获取失败");
+                    System.out.println("CSDN获取失败");
                     e.printStackTrace();
+                    return "数据获取失败";
                 }
                 if (doc != null) {
                     try {
@@ -118,38 +120,46 @@ public class FragmentCSDN extends Fragment implements SwipeRefreshLayout.OnRefre
                     } catch (Exception e) {
                         System.out.println("解析失败");
                         e.printStackTrace();
+                        return "数据解析失败";
                     }
                 } else {
-
+                    return "数据为空";
                 }
-                return null;
+                return "OK";
             }
 
             @Override
             protected void onPostExecute(Object o) {
                 super.onPostExecute(o);
-                if (datas.size() != 0 && datas != null) {
-                    adapter = new CSDNAdapter(getContext(), datas);
-                    adapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapter);
+                if (o.equals("OK")) {
+                    if (datas.size() != 0 && datas != null) {
+                        adapter = new CSDNAdapter(getContext(), datas);
+                        adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
+                        refreshLayout.setRefreshing(false);
+                        adapter.setOnItemClickListener(new CSDNAdapter.OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, final String data) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(new Intent(getContext(), ContentActivity.class).putExtra("url", data).putExtra("type", MyStringUtils.TYPE_CSDN));
+                                    }
+                                }, 1000);
+                            }
+                        });
+                    }
+                } else {
+                    showToast((String) o);
                     refreshLayout.setRefreshing(false);
-                    adapter.setOnItemClickListener(new CSDNAdapter.OnRecyclerViewItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, final String data) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type", MyStringUtils.TYPE_CSDN));
-                                }
-                            }, 1000);
-                        }
-                    });
                 }
             }
         };
-
         task.execute();
+    }
 
+    private void showToast(String str) {
+        Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
     }
 
     private String getMobileUrl(String url, String str) {
