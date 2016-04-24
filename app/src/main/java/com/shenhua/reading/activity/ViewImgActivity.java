@@ -16,18 +16,17 @@ import com.squareup.picasso.Picasso;
  */
 public class ViewImgActivity extends AppCompatActivity {
 
-    private RelativeLayout view_img_layout;
     private ZoomImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewimg);
-        view_img_layout = (RelativeLayout) findViewById(R.id.view_img_layout);
+        RelativeLayout view_img_layout = (RelativeLayout) findViewById(R.id.view_img_layout);
         imageView = (ZoomImageView) findViewById(R.id.view_img);
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
-        if (url != null || url.equals("")) viewImg(url);
+        if (url != null) viewImg(url);
         else Toast.makeText(getApplicationContext(), "查看图片失败！", Toast.LENGTH_LONG).show();
     }
 

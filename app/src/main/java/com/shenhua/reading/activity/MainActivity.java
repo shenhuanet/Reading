@@ -1,9 +1,7 @@
 package com.shenhua.reading.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private Fragment[] fragments = {FragmentHome.newInstance(), FragmentCSDN.newInstance(), FragmentSegf.newInstance(),
             FragmentJcode.newInstance(), FragmentTuiku.newInstance(), FragmentHonghei.newInstance(), FragmentKaiyuan.newInstance(),
             FragmentKaifazhe.newInstance(), FragmentKanyuanDaima.newInstance(), FragmentKanyuanZujian.newInstance(), FragmentOpen.newInstance()};
-    private View mCustomView;
     private BoomMenuButton boomInfo;
     private boolean isInit = false;
 
@@ -60,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setLogo(getResources().getDrawable(R.mipmap.ic_launcher));
+        toolbar.setLogo(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
         LayoutInflater mInflater = LayoutInflater.from(this);
-        mCustomView = mInflater.inflate(R.layout.main_toolbar, null);
+        View mCustomView = mInflater.inflate(R.layout.main_toolbar, null);
         TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         mTitleTextView.setText(R.string.app_name);
         boomInfo = (BoomMenuButton) mCustomView.findViewById(R.id.info);

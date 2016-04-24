@@ -38,8 +38,7 @@ public class MyHomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_HEADER) {
             View headView = LayoutInflater.from(context).inflate(R.layout.items_home_head, parent, false);
-            HomeHeaderHolder holder = new HomeHeaderHolder(headView);
-            return holder;
+            return new HomeHeaderHolder(headView);
         } else {
             View contentView = LayoutInflater.from(context).inflate(R.layout.items_home_his, parent, false);
             HomeContentHolder holder = new HomeContentHolder(contentView);

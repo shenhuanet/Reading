@@ -29,7 +29,7 @@ public class MyStringUtils {
     public static final String URL_SEGF = "http://segmentfault.com/t/android/blogs";//segmentfault
     public static final String URL_CSDN_YD = "http://blog.csdn.net/mobile/newest.html";//CSDN移动
     public static final String URL_CSDN_YD_M = "http://m.blog.csdn.net/article/details?id=";
-    public static final String URL_CSDN_ANDROID = "http://blog.csdn.net/tag/details.html?tag=android";//CSDN android
+    //    public static final String URL_CSDN_ANDROID = "http://blog.csdn.net/tag/details.html?tag=android";//CSDN android
     public static final String URL_JCODE = "http://www.jcodecraeer.com/plus/list.php?tid=16";//泡在网上的日子
     public static final String URL_OPEN = "http://www.open-open.com";//深度开源
 

@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,7 @@ import com.shenhua.reading.utils.MyStringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class ContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
@@ -70,7 +72,7 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
         webView.loadUrl(_url);
     }
 
-    @SuppressLint("JavascriptInterface")
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void initView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
         toolbar.setTitle("");
@@ -86,7 +88,7 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
         boomMenuButton.setDimType(DimType.DIM_0);
         boomMenuButton.setDuration(500);
         boomMenuButton.setDelay(100);
-        boomMenuButton.setRotateDegree(1 * 360);
+        boomMenuButton.setRotateDegree(360);
         boomMenuButton.setAutoDismiss(false);
         boomMenuButton.setShowOrderType(OrderType.DEFAULT);
         boomMenuButton.setHideOrderType(OrderType.DEFAULT);
@@ -189,7 +191,7 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
                 break;
             case 1://shoucang
                 HistoryData data = new HistoryData();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
                 Date now = new Date();
                 data.setTime(dateFormat.format(now));
                 data.setUrl(_url);
@@ -201,25 +203,30 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
                 break;
             case 2://send
                 boomMenuButton.dismiss();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TITLE, "分享Reading文章链接");
-                intent.putExtra(Intent.EXTRA_TEXT, "标题：" + _title + "\n链接：" + _url);
-                Intent chooserIntent = Intent.createChooser(intent, "请选择一个要发送的应用：");
-                if (chooserIntent == null) {
-                    return;
-                }
-                try {
-                    startActivity(chooserIntent);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    showToast("发送失败，失败原因：未找到该应用。");
-                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_TITLE, "分享Reading文章链接");
+                        intent.putExtra(Intent.EXTRA_TEXT, "标题：" + _title + "\n链接：" + _url);
+                        Intent chooserIntent = Intent.createChooser(intent, "请选择一个要发送的应用：");
+                        if (chooserIntent == null) {
+                            return;
+                        }
+                        try {
+                            startActivity(chooserIntent);
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            showToast("发送失败，失败原因：未找到该应用。");
+                        }
+                    }
+                }, 700);
                 break;
             case 3://scroll to top
                 webView.scrollTo(0, 0);
                 break;
         }
-        if (boomMenuButton.isClosed() == false)
+        if (!boomMenuButton.isClosed())
             boomMenuButton.dismiss();
         mdao.close();
     }
@@ -300,6 +307,7 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
         String[] STRINGS = new String[]{"复制网址", "收藏到本地", "发送", "回到顶部"};
         String[] strings = new String[number];
         for (int i = 0; i < number; i++)
+//            System.arraycopy(STRINGS, i, strings, i, STRINGS[i].length());
             strings[i] = STRINGS[i];
         int[][] colors = new int[number][2];
         for (int i = 0; i < number; i++) {

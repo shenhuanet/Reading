@@ -71,9 +71,8 @@ public class ZoomImageView extends ImageView implements OnScaleGestureListener,
                 new SimpleOnGestureListener() {
                     @Override
                     public boolean onDoubleTap(MotionEvent e) {
-                        if (isAutoScale == true)
+                        if (isAutoScale)
                             return true;
-
                         float x = e.getX();
                         float y = e.getY();
                         Log.e("DoubleTap", getScale() + " , " + initScale);
@@ -91,7 +90,6 @@ public class ZoomImageView extends ImageView implements OnScaleGestureListener,
                                     new AutoScaleRunnable(initScale, x, y), 16);
                             isAutoScale = true;
                         }
-
                         return true;
                     }
                 });

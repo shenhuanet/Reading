@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * Created by Shenhua on 4/20/2016.
  */
-public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
+public class MyBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
     private Context context;
     private List<MyDatasBean> datas;
 
-    public BaseAdapter(Context context, List<MyDatasBean> datas) {
+    public MyBaseAdapter(Context context, List<MyDatasBean> datas) {
         this.context = context;
         this.datas = datas;
     }

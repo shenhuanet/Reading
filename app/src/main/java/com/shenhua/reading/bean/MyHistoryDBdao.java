@@ -45,7 +45,7 @@ public class MyHistoryDBdao {
 
     public List<HistoryData> getAllDatas() {
         Cursor cursor = sqldb.rawQuery("select * from " + MyStringUtils.TABLE_NAME + ";", null);
-        datas = new ArrayList<HistoryData>();
+        datas = new ArrayList<>();
         datas.clear();
         while (cursor.moveToNext()) {
             HistoryData data = new HistoryData();
