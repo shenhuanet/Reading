@@ -35,4 +35,32 @@ public class MyStringUtils {
 
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36";
     public static String[] RandomColors = {"#F44336", "#E91E63", "#9C27B0", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548", "#9E9E9E", "#607D8B"};
+
+    public static String toUtf8String(String s) {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c >= 0 && c <= 255) {
+                stringBuffer.append(c);
+            } else {
+                byte[] b;
+                try {
+                    b = String.valueOf(c).getBytes("utf-8");
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                    b = new byte[0];
+                }
+                for (int j = 0; j < b.length; j++) {
+                    int k = b[j];
+                    if (k < 0)
+                        k += 256;
+                    stringBuffer.append("%" + Integer.toHexString(k).toUpperCase());
+                }
+            }
+        }
+        String result = stringBuffer.toString();
+        result = result.replaceAll(" +", "+");
+        return result;
+    }
+
 }

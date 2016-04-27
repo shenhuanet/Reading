@@ -1,6 +1,8 @@
 package com.shenhua.reading.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +11,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shenhua.reading.R;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.bean.HistoryData;
+import com.shenhua.reading.utils.MyStringUtils;
 
 import java.util.List;
 
@@ -49,7 +52,7 @@ public class MyHomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HomeContentHolder) {
             HistoryData data = datas.get(position - mHeaderCount);
             ((HomeContentHolder) holder).title.setText(data.getTitle());
@@ -67,7 +70,21 @@ public class MyHomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((HomeHeaderHolder) holder).btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Click me", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Click me", Toast.LENGTH_SHORT).show();
+                    String str = ((HomeHeaderHolder) holder).et.getText().toString();
+                    if (str.equals("") || str.replaceAll(" +", "").equals("")) {
+                        return;
+                    }else {
+                        String url = "https://www.baidu.com/s?wd=";
+                        url = url + MyStringUtils.toUtf8String(str);
+                        final String finalUrl = url;
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                context.startActivity(new Intent(context, ContentActivity.class).putExtra("url", finalUrl).putExtra("type", -2));
+                            }
+                        }, 800);
+                    }
                 }
             });
         }
