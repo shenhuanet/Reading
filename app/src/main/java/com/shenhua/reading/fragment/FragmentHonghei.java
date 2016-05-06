@@ -2,7 +2,6 @@ package com.shenhua.reading.fragment;
 
 import com.shenhua.reading.utils.MyStringUtils;
 
-
 public class FragmentHonghei extends BaseFragment {
 
     private static FragmentHonghei instance = null;

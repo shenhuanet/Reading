@@ -101,6 +101,10 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
         settings.setJavaScriptEnabled(true);
         settings.setAllowContentAccess(true);
         settings.setBuiltInZoomControls(false);
+        settings.setSupportZoom(true);
+        settings.setTextSize(WebSettings.TextSize.SMALLEST);
+//        settings.setTextZoom(10);
+        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         webView.setDrawingCacheEnabled(true);
         webView.addJavascriptInterface(new JavascriptInterface(this), JsTag);
         webView.setWebChromeClient(new WebChromeClient() {
@@ -278,8 +282,7 @@ public class ContentActivity extends AppCompatActivity implements BoomMenuButton
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
+            return false;
         }
     }
 

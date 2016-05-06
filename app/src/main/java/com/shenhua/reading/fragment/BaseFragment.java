@@ -80,9 +80,12 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             if (getType() == MyStringUtils.TYPE_TUIKU || getType() == MyStringUtils.TYPE_HONGHEI || getType() == MyStringUtils.TYPE_KAIFAZHE || getType() == MyStringUtils.TYPE_KAN_ZUJIAN) {
                 mImageLoader = ImageLoader.getInstance();
+//                options = new DisplayImageOptions.Builder().cacheInMemory(true)
+//                        .cacheOnDisc(true).bitmapConfig(Bitmap.Config.ARGB_8888)
+//                        .imageScaleType(ImageScaleType.NONE).build();
                 options = new DisplayImageOptions.Builder().cacheInMemory(true)
-                        .cacheOnDisc(true).bitmapConfig(Bitmap.Config.ARGB_8888)
-                        .imageScaleType(ImageScaleType.NONE).build();
+                        .cacheOnDisc(true).bitmapConfig(Bitmap.Config.RGB_565)
+                        .imageScaleType(ImageScaleType.EXACTLY).build();
             }
         }
         ViewGroup group = (ViewGroup) view.getParent();
@@ -367,14 +370,22 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
             Elements main = doc.body().getElementById("fontzoom").getElementsByClass("AtrListBox");
             for (Element element : main) {
                 MyDatasBean data = new MyDatasBean();
-                data.setTitle(element.getElementsByTag("h3").text().trim());
-                data.setUrl(element.getElementsByTag("h3").get(0).getElementsByTag("a").attr("href").trim());
+                String title = element.getElementsByClass("LTitle").text().trim();
+                if (title.equals("")) {
+                    title = element.getElementsByClass("ATitle").text().trim();
+                }
+                data.setTitle(title);
+                Elements href = element.getElementsByClass("LTitle");
+                if (href.isEmpty()) {
+                    href = element.getElementsByClass("ATitle");
+                }
+                String h = "http://www.2cto.com" + href.get(0).getElementsByTag("a").attr("href").trim();
+                data.setUrl(h);
                 String ss = element.getElementsByClass("ADesc").text().trim();
                 Elements s = element.getElementsByClass("ArtPic");
                 data.setDescribe("\u3000\u3000" + ss);
-//                data.setTime(ss[1]);
                 if (!s.isEmpty()) {
-                    data.setImgUrl(s.get(0).getElementsByTag("img").attr("src").trim());
+                    data.setImgUrl("http://www.2cto.com" + s.get(0).getElementsByTag("img").attr("src").trim());
                 } else {
                     data.setImgUrl("");
                 }
