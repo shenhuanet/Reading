@@ -63,6 +63,7 @@ public class CSDNAdapter extends RecyclerView.Adapter<CSDNAdapter.CsdnViewHolder
 
     @Override
     public int getItemCount() {
+        if (datas == null || datas.size() == 0) return 0;
         return datas.size();
     }
 

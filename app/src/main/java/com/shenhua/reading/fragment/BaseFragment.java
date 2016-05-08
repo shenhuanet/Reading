@@ -78,11 +78,21 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
             recyclerView.setLayoutManager(llm);
             recyclerView.setHasFixedSize(true);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
+//            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+//                @Override
+//                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                    int topRowVerticalPosition =
+//                            (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
+//                    refreshLayout.setEnabled(topRowVerticalPosition >= 0);
+//                }
+//
+//                @Override
+//                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                    super.onScrollStateChanged(recyclerView, newState);
+//                }
+//            });
             if (getType() == MyStringUtils.TYPE_TUIKU || getType() == MyStringUtils.TYPE_HONGHEI || getType() == MyStringUtils.TYPE_KAIFAZHE || getType() == MyStringUtils.TYPE_KAN_ZUJIAN) {
                 mImageLoader = ImageLoader.getInstance();
-//                options = new DisplayImageOptions.Builder().cacheInMemory(true)
-//                        .cacheOnDisc(true).bitmapConfig(Bitmap.Config.ARGB_8888)
-//                        .imageScaleType(ImageScaleType.NONE).build();
                 options = new DisplayImageOptions.Builder().cacheInMemory(true)
                         .cacheOnDisc(true).bitmapConfig(Bitmap.Config.RGB_565)
                         .imageScaleType(ImageScaleType.EXACTLY).build();
@@ -92,7 +102,6 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
         if (group != null)
             group.removeView(view);
         return view;
-
     }
 
     @Override
@@ -300,6 +309,7 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
             } else {
                 showToast(s);
                 refreshLayout.setRefreshing(false);
+                refreshLayout.setEnabled(true);
             }
         }
     }
