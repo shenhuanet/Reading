@@ -5,24 +5,22 @@
     android:id="@+id/shadow_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:sl_shadowRadius="4dp"
-    app:sl_shadowColor="@color/shadow"
+    app:sl_cornerRadius="56dp"
     app:sl_dx="2dp"
     app:sl_dy="2dp"
-    app:sl_cornerRadius="56dp">
+    app:sl_shadowColor="@color/shadow"
+    app:sl_shadowRadius="4dp">
 
     <FrameLayout
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_gravity="center"
-        >
+        android:layout_gravity="center">
 
         <FrameLayout
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            >
+            android:layout_gravity="center">
 
         </FrameLayout>
 
@@ -30,8 +28,8 @@
             android:id="@+id/ripple"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
             android:background="@drawable/boom_button_ripple"
+            android:clickable="true"
             tools:targetApi="lollipop" />
 
     </FrameLayout>

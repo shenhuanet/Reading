@@ -1,9 +1,7 @@
 package com.shenhua.reading.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,7 +112,20 @@ public class MainActivity extends AppCompatActivity {
             colors[i][1] = ContextCompat.getColor(this, R.color.colorMaterialWhite);
             colors[i][0] = Util.getInstance().getPressedColor(colors[i][1]);
         }
-        boomInfo.init(drawables, new String[]{"关于", "设置", "分享"}, colors, ButtonType.HAM, BoomType.PARABOLA, PlaceType.HAM_3_1, null, null, null, null, null, null, null);
+        boomInfo.init(
+                drawables,
+                new String[]{"关于", "设置", "分享"},
+                colors,
+                ButtonType.HAM,
+                BoomType.PARABOLA,
+                PlaceType.HAM_3_1,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
         boomInfo.setSubButtonShadowOffset(Util.getInstance().dp2px(2), Util.getInstance().dp2px(2));
         boomInfo.setTextViewColor(Color.BLACK);
         boomInfo.setBoomType(BoomType.PARABOLA_2);

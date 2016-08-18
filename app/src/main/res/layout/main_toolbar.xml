@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/boom"
-        android:layout_toRightOf="@+id/boom"
+        android:layout_toEndOf="@+id/info"
+        android:layout_toRightOf="@+id/info"
         android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
