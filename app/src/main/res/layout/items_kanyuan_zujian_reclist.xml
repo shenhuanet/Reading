@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     ripple:rv_color="@color/colorIndicator"
-    ripple:rv_rippleDuration="200"
-    ripple:rv_type="doubleRipple"
-    ripple:rv_zoom="true">
+    ripple:rv_rippleDuration="400"
+    ripple:rv_type="rectangle">
 
     <android.support.v7.widget.CardView
         android:id="@+id/kyzj_item_layout"

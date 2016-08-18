@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.bean.MyDatasBean;
 import com.shenhua.reading.utils.MyStringUtils;
 
@@ -56,7 +56,8 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
 
     public class HongheiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         View layout;
-        TextView title, describe, time;
+        TextView title, describe;
+//        TextView time;
         ImageView iv;
 
         public HongheiViewHolder(View itemView) {
@@ -64,7 +65,7 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
             layout = itemView.findViewById(R.id.hh_item_layout);
             title = (TextView) itemView.findViewById(R.id.hh_item_title);
             describe = (TextView) itemView.findViewById(R.id.hh_item_describe);
-            time = (TextView) itemView.findViewById(R.id.hh_item_time);
+//            time = (TextView) itemView.findViewById(R.id.hh_item_time);
             iv = (ImageView) itemView.findViewById(R.id.hh_item_iv);
             layout.setOnClickListener(this);
             iv.setOnClickListener(this);
@@ -73,7 +74,7 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
         public void bindDatas(MyDatasBean bean) {
             title.setText(bean.getTitle());
             describe.setText(bean.getDescribe());
-            time.setText(bean.getTime());
+//            time.setText(bean.getTime());
             imageLoader.displayImage(bean.getImgUrl(), iv, options);
             itemView.setTag(bean.getUrl());//将数据保存在Tag中，以便点击时进行获取
             iv.setTag(bean.getImgUrl());
@@ -86,7 +87,7 @@ public class HongheiAdapter extends RecyclerView.Adapter<HongheiAdapter.HongheiV
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            context.startActivity(new Intent(context, ActivityContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_HONGHEI));
+                            context.startActivity(new Intent(context, ContentActivity.class).putExtra("url", itemView.getTag().toString()).putExtra("type", MyStringUtils.TYPE_HONGHEI));
                         }
                     }, 1000);
                     break;

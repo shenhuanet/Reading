@@ -13,13 +13,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shenhua.reading.R;
-import com.shenhua.reading.activity.ActivityContentActivity;
+import com.shenhua.reading.activity.ContentActivity;
 import com.shenhua.reading.adapter.MyHomeListAdapter;
 import com.shenhua.reading.bean.HistoryData;
 import com.shenhua.reading.bean.MyHistoryDBdao;
@@ -92,7 +91,7 @@ public class FragmentHome extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", data).putExtra("type", -1));
+                                startActivity(new Intent(getContext(), ContentActivity.class).putExtra("url", data).putExtra("type", -1));
                             }
                         }, 1000);
                     }
@@ -110,7 +109,7 @@ public class FragmentHome extends Fragment {
                                     case 0:
                                         break;
                                     case 1:
-                                        startActivity(new Intent(getContext(), ActivityContentActivity.class).putExtra("url", url).putExtra("type", -1));
+                                        startActivity(new Intent(getContext(), ContentActivity.class).putExtra("url", url).putExtra("type", -1));
                                         break;
                                     case 2:
                                         break;
@@ -124,6 +123,5 @@ public class FragmentHome extends Fragment {
         };
         task.execute();
     }
-
 
 }

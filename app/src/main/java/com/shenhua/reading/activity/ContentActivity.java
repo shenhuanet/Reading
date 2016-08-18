@@ -1,15 +1,19 @@
 package com.shenhua.reading.activity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,11 +41,12 @@ import com.shenhua.reading.utils.MyStringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
-public class ActivityContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
+public class ContentActivity extends AppCompatActivity implements BoomMenuButton.OnSubButtonClickListener {
 
-    private String _url = "", _title = "";
+    private String _url = "", _title = "", imgUrl = "";
     private int _type = 0;
     private ProgressBar content_pro;
     private WebView webView;
@@ -49,6 +54,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
     private BoomMenuButton boomMenuButton;
     private boolean isInit = false;
     public boolean isLoading = false;
+    private String JsTag = "img_view";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         webView.loadUrl(_url);
     }
 
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void initView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.content_toolbar);
         toolbar.setTitle("");
@@ -73,7 +80,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityContentActivity.this.finish();
+                ContentActivity.this.finish();
             }
         });
         boomMenuButton = (BoomMenuButton) findViewById(R.id.boombtn);
@@ -81,7 +88,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         boomMenuButton.setDimType(DimType.DIM_0);
         boomMenuButton.setDuration(500);
         boomMenuButton.setDelay(100);
-        boomMenuButton.setRotateDegree(1 * 360);
+        boomMenuButton.setRotateDegree(360);
         boomMenuButton.setAutoDismiss(false);
         boomMenuButton.setShowOrderType(OrderType.DEFAULT);
         boomMenuButton.setHideOrderType(OrderType.DEFAULT);
@@ -89,11 +96,17 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         content_pro = (ProgressBar) findViewById(R.id.content_pro);
         webView = (WebView) findViewById(R.id.content_web);
         textView = (TextView) findViewById(R.id.content_info);
+        this.registerForContextMenu(webView);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setAllowContentAccess(true);
         settings.setBuiltInZoomControls(false);
+        settings.setSupportZoom(true);
+        settings.setTextSize(WebSettings.TextSize.SMALLEST);
+//        settings.setTextZoom(10);
+        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         webView.setDrawingCacheEnabled(true);
+        webView.addJavascriptInterface(new JavascriptInterface(this), JsTag);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
@@ -102,6 +115,60 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             }
         });
         webView.setWebViewClient(new MyWebViewClient());
+    }
+
+    public class JavascriptInterface {
+        private Context context;
+
+        public JavascriptInterface(Context context) {
+            this.context = context;
+        }
+
+        public void openImage(String img) {
+            System.out.println("clickImgUrl:" + img);
+            context.startActivity(new Intent(context, ViewImgActivity.class).putExtra("url", img));
+        }
+    }
+
+    private void addImageClickListner() {
+        // 这段js函数的功能就是，遍历所有的img几点，并添加onclick函数，函数的功能是在图片点击的时候调用本地java接口并传递url过去
+        webView.loadUrl("javascript:(function(){" +
+                "var objs = document.getElementsByTagName(\"img\"); " +
+                "for(var i=0;i<objs.length;i++)  " +
+                "{"
+                + "    objs[i].onclick=function()  " +
+                "    {  "
+                + "        window." + JsTag + ".openImage(this.src);  " +
+                "    }  " +
+                "}" +
+                "})()");
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuItem.OnMenuItemClickListener handler = new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == 0)
+                    startActivity(new Intent(ContentActivity.this, ViewImgActivity.class).putExtra("url", imgUrl));
+                else Toast.makeText(getApplicationContext(), "还未实现", Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        };
+        if (v instanceof WebView) {
+            WebView.HitTestResult result = ((WebView) v).getHitTestResult();
+            int type = result.getType();
+            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                imgUrl = result.getExtra();
+                menu.add(0, 0, 0, "查看图片")
+                        .setOnMenuItemClickListener(handler);
+                menu.add(0, 1, 0, "保存图片")
+                        .setOnMenuItemClickListener(handler);
+            }
+        }
+
     }
 
     @Override
@@ -128,7 +195,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
                 break;
             case 1://shoucang
                 HistoryData data = new HistoryData();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
                 Date now = new Date();
                 data.setTime(dateFormat.format(now));
                 data.setUrl(_url);
@@ -140,25 +207,30 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
                 break;
             case 2://send
                 boomMenuButton.dismiss();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TITLE, "分享Reading文章链接");
-                intent.putExtra(Intent.EXTRA_TEXT, "标题：" + _title + "\n链接：" + _url);
-                Intent chooserIntent = Intent.createChooser(intent, "请选择一个要发送的应用：");
-                if (chooserIntent == null) {
-                    return;
-                }
-                try {
-                    startActivity(chooserIntent);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    showToast("发送失败，失败原因：未找到该应用。");
-                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_TITLE, "分享Reading文章链接");
+                        intent.putExtra(Intent.EXTRA_TEXT, "标题：" + _title + "\n链接：" + _url);
+                        Intent chooserIntent = Intent.createChooser(intent, "请选择一个要发送的应用：");
+                        if (chooserIntent == null) {
+                            return;
+                        }
+                        try {
+                            startActivity(chooserIntent);
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            showToast("发送失败，失败原因：未找到该应用。");
+                        }
+                    }
+                }, 700);
                 break;
             case 3://scroll to top
                 webView.scrollTo(0, 0);
                 break;
         }
-        if (boomMenuButton.isClosed() == false)
+        if (!boomMenuButton.isClosed())
             boomMenuButton.dismiss();
         mdao.close();
     }
@@ -205,12 +277,12 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
             invalidateOptionsMenu();
             content_pro.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
+            addImageClickListner();
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
+            return false;
         }
     }
 
@@ -238,6 +310,7 @@ public class ActivityContentActivity extends AppCompatActivity implements BoomMe
         String[] STRINGS = new String[]{"复制网址", "收藏到本地", "发送", "回到顶部"};
         String[] strings = new String[number];
         for (int i = 0; i < number; i++)
+//            System.arraycopy(STRINGS, i, strings, i, STRINGS[i].length());
             strings[i] = STRINGS[i];
         int[][] colors = new int[number][2];
         for (int i = 0; i < number; i++) {

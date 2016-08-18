@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     ripple:rv_color="@color/colorIndicator"
-    ripple:rv_rippleDuration="100"
-    ripple:rv_type="doubleRipple">
+    ripple:rv_rippleDuration="400"
+    ripple:rv_type="rectangle">
 
     <LinearLayout
         android:id="@+id/hh_item_layout"
@@ -20,14 +20,17 @@
         <ImageView
             android:id="@+id/hh_item_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:maxHeight="170dp"
+            android:maxWidth="120dp"
             android:padding="5dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -45,23 +48,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:lines="3"
                 android:textColor="@android:color/black" />
 
-            <TextView
-                android:id="@+id/hh_item_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:drawableLeft="@mipmap/ic_time"
-                android:drawablePadding="5dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="10sp" />
-
+            <!--<TextView-->
+            <!--android:id="@+id/hh_item_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:drawableLeft="@mipmap/ic_time"-->
+            <!--android:drawablePadding="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="3dp"-->
+            <!--android:textSize="10sp" />-->
 
         </LinearLayout>
-
 
     </LinearLayout>
 </com.andexert.library.RippleView>

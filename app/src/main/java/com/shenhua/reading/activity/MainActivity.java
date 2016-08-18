@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private Fragment[] fragments = {FragmentHome.newInstance(), FragmentCSDN.newInstance(), FragmentSegf.newInstance(),
             FragmentJcode.newInstance(), FragmentTuiku.newInstance(), FragmentHonghei.newInstance(), FragmentKaiyuan.newInstance(),
             FragmentKaifazhe.newInstance(), FragmentKanyuanDaima.newInstance(), FragmentKanyuanZujian.newInstance(), FragmentOpen.newInstance()};
-    private View mCustomView;
     private BoomMenuButton boomInfo;
     private boolean isInit = false;
 
@@ -56,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setLogo(getResources().getDrawable(R.mipmap.ic_launcher));
+        toolbar.setLogo(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
         LayoutInflater mInflater = LayoutInflater.from(this);
-        mCustomView = mInflater.inflate(R.layout.main_toolbar, null);
+        View mCustomView = mInflater.inflate(R.layout.main_toolbar, null);
         TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         mTitleTextView.setText(R.string.app_name);
         boomInfo = (BoomMenuButton) mCustomView.findViewById(R.id.info);

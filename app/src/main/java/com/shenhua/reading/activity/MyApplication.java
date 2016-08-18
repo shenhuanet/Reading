@@ -29,6 +29,7 @@ public class MyApplication extends Application {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
                 getApplicationContext())
                 .defaultDisplayImageOptions(defaultOptions)
+                .memoryCacheExtraOptions(480, 680)
                 .memoryCache(new LruMemoryCache(12 * 1024 * 1024))
                 .memoryCacheSize(12 * 1024 * 1024)
                 .discCacheSize(32 * 1024 * 1024).discCacheFileCount(100)

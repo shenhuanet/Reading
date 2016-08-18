@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     ripple:rv_color="@color/colorIndicator"
     ripple:rv_rippleDuration="400"
-    ripple:rv_type="rectangle"
-    ripple:rv_zoom="true">
+    ripple:rv_type="rectangle">
 
     <LinearLayout
         android:layout_width="match_parent"
